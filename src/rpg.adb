@@ -1,13 +1,9 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with RPG.Player_Creation;
+with RPG.Types; use RPG.Types;
 
 package body RPG is
    procedure Game_Loop(G : in out Game);
-
-   procedure Replace(S : in out Game_Mode_Stack_T; M : Game_Mode) is
-   begin
-      S.Replace_Element(S.Last_Index, M);
-   end Replace;
 
    procedure Run is
       G : Game;
@@ -30,7 +26,7 @@ package body RPG is
             RPG.Player_Creation.Run_Pick_Class(G);
          when Main_Menu =>
             Put_Line("Main Menu!");
-            RPG.Replace(G.Modes, Quit);
+            RPG.Types.Replace(G.Modes, Quit);
          when Quit =>
             Put_Line("Goodbye!");
       end case;

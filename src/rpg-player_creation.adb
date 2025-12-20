@@ -2,7 +2,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Strings; use Ada.Strings;
 with Ada.Strings.Fixed; use Ada.Strings.Fixed;
 with Ada.Characters.Handling; use Ada.Characters.Handling;
-with RPG;
+with RPG.Types; use RPG.Types;
 
 package body RPG.Player_Creation is
    function Is_Valid_Name(S : String) return Boolean is
@@ -15,7 +15,7 @@ package body RPG.Player_Creation is
       return True;
    end Is_Valid_Name;
 
-   procedure Run_Pick_Name(G : in out RPG.Game) is
+   procedure Run_Pick_Name(G : in out Game) is
       Input : String(1 .. 100);
       Last  : Natural;
    begin
@@ -24,12 +24,12 @@ package body RPG.Player_Creation is
       declare
          Trimmed : constant String := Trim(Input(1 .. Last), Both);
       begin
-         if Trimmed'Length < RPG.Creature_Name.Min_Length then
-            Put_Line("Error: Name too short (min" & RPG.Creature_Name.Min_Length'Image & " characters) ");
+         if Trimmed'Length < Creature_Name.Min_Length then
+            Put_Line("Error: Name too short (min" & Creature_Name.Min_Length'Image & " characters) ");
             return;
          end if;
-         if Trimmed'Length > RPG.Creature_Name.Max_Length then
-            Put_Line("Error: Name too long (max" & RPG.Creature_Name.Max_Length'Image & " characters).");
+         if Trimmed'Length > Creature_Name.Max_Length then
+            Put_Line("Error: Name too long (max" & Creature_Name.Max_Length'Image & " characters).");
             return;
          end if;
          if not Is_Valid_Name(Trimmed) then
@@ -37,16 +37,16 @@ package body RPG.Player_Creation is
             return;
          end if;
 
-         G.Player_Creature.Name := RPG.Creature_Name.Create(Trimmed);
-         RPG.Replace(G.Modes, Pick_Class);
+         G.Player_Creature.Name := Creature_Name.Create(Trimmed);
+         RPG.Types.Replace(G.Modes, Pick_Class);
 
-         Put_Line("Welcome, " & RPG.Creature_Name.To_String(G.Player_Creature.Name) & "!");
+         Put_Line("Welcome, " & Creature_Name.To_String(G.Player_Creature.Name) & "!");
       end;
    end Run_Pick_Name;
 
-   procedure Run_Pick_Class(G : in out RPG.Game) is
+   procedure Run_Pick_Class(G : in out Game) is
    begin
       Put_Line("Pick Class!");
-      RPG.Replace(G.Modes, Main_Menu);
+      RPG.Types.Replace(G.Modes, Main_Menu);
    end Run_Pick_class;
 end RPG.Player_Creation;
