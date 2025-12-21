@@ -30,7 +30,7 @@ package body RPG.Classes is
          HP_Gain : Integer := RPG.Dice.Roll(C_Class.HP_Per_Level);
       begin
          if HP_Gain > 0 then
-            Increase_Maximum(C.HP, Creature_Maximum_HP(HP_Gain));
+            Increase_Maximum(C.Stats.HP, Creature_Maximum_HP(HP_Gain));
          end if;
       end;
    end Level_Up;
@@ -38,8 +38,8 @@ package body RPG.Classes is
    procedure Initialize_Creature(C : in out Creature; Id : Class_Id; Level : Creature_Level) is
    begin
       C.Level := 0;
-      C.HP.Maximum := 0;
-      C.HP.Current := 0;
+      C.Stats.HP.Maximum := 0;
+      C.Stats.HP.Current := 0;
       for I in 1 .. Level loop
          Level_Up(C, Id);
       end loop;

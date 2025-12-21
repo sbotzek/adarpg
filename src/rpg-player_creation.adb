@@ -3,6 +3,7 @@ with Ada.Strings; use Ada.Strings;
 with Ada.Strings.Fixed; use Ada.Strings.Fixed;
 with Ada.Characters.Handling; use Ada.Characters.Handling;
 with RPG.Classes;
+with RPG.Stats;
 with RPG.Types; use RPG.Types;
 
 package body RPG.Player_Creation is
@@ -74,6 +75,7 @@ package body RPG.Player_Creation is
             Index := Index + 1;
             if Index = Choice then
                G.Player_Class_Id := Id;
+               RPG.Stats.Roll_Primary_Stats(G.Player_Creature.Stats);
                RPG.Classes.Initialize_Creature(G.Player_Creature, Id, 1);
                G.Modes.Delete_Last;
                G.Modes.Append(Main_Menu);

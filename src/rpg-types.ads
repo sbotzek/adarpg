@@ -27,19 +27,10 @@ package RPG.Types is
    package Creature_Name is new Text_Bounded(Min => 3, Max => 20);
    type Creature_Level is new Natural with Default_Value => 0;
 
-   type Creature_HP is record
-      Maximum : Creature_Maximum_HP := 0;
-      Current : Creature_Current_HP := 0;
-   end record;
-   procedure Damage (HP : in out Creature_HP; Amount : Creature_Current_HP);
-   procedure Heal (HP : in out Creature_HP; Amount : Creature_Current_HP);
-   procedure Full_Heal (HP : in out Creature_HP);
-   procedure Increase_Maximum(HP : in out Creature_HP; Amount : Creature_Maximum_HP);
-
    type Creature is record
       Name : Creature_Name.T;
       Level : Creature_Level := 1;
-      HP : Creature_HP;
+      Stats : Creature_Stats;
    end record;
 
    type Game is record
