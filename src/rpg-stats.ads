@@ -2,18 +2,25 @@ with RPG.Stat;
 
 package RPG.Stats is
    -- HP
+   type Creature_Maximum_HP_Natural is new Natural range 0 .. 9999;
+   type Creature_Maximum_HP_Modified is new Integer range -9999 .. 9999;
+   type Creature_Maximum_HP_Effective is new Natural range 0 .. 19998;
+   package Creature_Maximum_HP is new RPG.Stat
+     (Natural_Value   => Creature_Maximum_HP_Natural,
+      Modified_Value  => Creature_Maximum_HP_Modified,
+      Effective_Value => Creature_Maximum_HP_Effective);
+
    type Creature_Current_HP is new Natural with Default_Value => 0;
-   type Creature_Maximum_HP is new Natural with Default_Value => 0;
 
    type Creature_HP is record
-      Maximum : Creature_Maximum_HP := 0;
+      Maximum : Creature_Maximum_HP.T;
       Current : Creature_Current_HP := 0;
    end record;
 
-   procedure Damage (HP : in out Creature_HP; Amount : Creature_Current_HP);
+   procedure Damage (HP : in Out Creature_HP; Amount : Creature_Current_HP);
    procedure Heal (HP : in Out Creature_HP; Amount : Creature_Current_HP);
    procedure Full_Heal (HP : in Out Creature_HP);
-   procedure Increase_Maximum(HP : in Out Creature_HP; Amount : Creature_Maximum_HP);
+   procedure Increase_Maximum_Natural (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Natural);
 
    -- Primary Stats
    type Primary_Stat_Natural is new Natural range 0 .. 99;

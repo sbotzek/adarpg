@@ -21,10 +21,10 @@ package body RPG.Stats is
 
    procedure Heal (HP : in Out Creature_HP; Amount : Creature_Current_HP) is
       New_Current : constant Natural := Natural(HP.Current) + Natural(Amount);
-      Max_Value   : constant Natural := Natural(HP.Maximum);
+      Max_Value   : constant Natural := Natural(Creature_Maximum_HP.Value(HP.Maximum));
    begin
       if New_Current >= Max_Value then
-         HP.Current := Creature_Current_HP(HP.Maximum);
+         HP.Current := Creature_Current_HP(Max_Value);
       else
          HP.Current := Creature_Current_HP(New_Current);
       end if;
@@ -32,14 +32,14 @@ package body RPG.Stats is
 
    procedure Full_Heal (HP : in Out Creature_HP) is
    begin
-      HP.Current := Creature_Current_HP(HP.Maximum);
+      HP.Current := Creature_Current_HP(Creature_Maximum_HP.Value(HP.Maximum));
    end Full_Heal;
 
-   procedure Increase_Maximum(HP : in Out Creature_HP; Amount : Creature_Maximum_HP) is
-      New_Max     : constant Natural := Natural(HP.Maximum) + Natural(Amount);
+   procedure Increase_Maximum_Natural (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Natural) is
+      New_Natural : constant Natural := Natural(HP.Maximum.Natural) + Natural(Amount);
       New_Current : constant Natural := Natural(HP.Current) + Natural(Amount);
    begin
-      HP.Maximum := Creature_Maximum_HP(New_Max);
+      HP.Maximum.Natural := Creature_Maximum_HP_Natural(New_Natural);
       HP.Current := Creature_Current_HP(New_Current);
-   end Increase_Maximum;
+   end Increase_Maximum_Natural;
 end RPG.Stats;
