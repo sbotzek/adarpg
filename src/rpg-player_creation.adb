@@ -62,7 +62,6 @@ package body RPG.Player_Creation is
          Input   : constant String := Trim(Get_Line, Both);
          Choice  : Natural;
          Index   : Natural := 0;
-         Found   : Boolean := False;
       begin
          begin
             Choice := Natural'Value(Input);
@@ -75,14 +74,14 @@ package body RPG.Player_Creation is
          for Id in Class_Id loop
             Index := Index + 1;
             if Index = Choice then
-               G.Player_Creature.Class_Id := Id;
+               G.Player_Class_Id := Id;
                G.Modes.Delete_Last;
                G.Modes.Append(Main_Menu);
                exit;
             end if;
          end loop;
 
-         if G.Player_Creature.Class_Id = None then
+         if G.Player_Class_Id = None then
             Put_Line("Invalid number.");
             return;
          end if;

@@ -24,12 +24,12 @@ package RPG.Types is
    package Creature_Name is new Text_Bounded(Min => 3, Max => 20);
    type Creature is record
       Name : Creature_Name.T;
-      Class_Id : Optional_Class_Id;
    end record;
 
 
    type Game is record
       Modes           : Game_Mode_Stack_T;
       Player_Creature : Creature;
+      Player_Class_Id : Optional_Class_Id := None;
    end record;
 end RPG.Types;
