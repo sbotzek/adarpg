@@ -36,7 +36,8 @@ package body RPG.Player_Creation is
          end if;
 
          G.Player_Creature.Name := Creature_Name.Create(Trimmed);
-         RPG.Types.Replace(G.Modes, Pick_Class);
+         G.Modes.Delete_Last;
+         G.Modes.Append(Pick_Class);
 
          Put_Line("Welcome, " & Creature_Name.To_String(G.Player_Creature.Name) & "!");
       end;
@@ -45,6 +46,7 @@ package body RPG.Player_Creation is
    procedure Run_Pick_Class(G : in out Game) is
    begin
       Put_Line("Pick Class!");
-      RPG.Types.Replace(G.Modes, Main_Menu);
+      G.Modes.Delete_Last;
+      G.Modes.Append(Main_Menu);
    end Run_Pick_class;
 end RPG.Player_Creation;

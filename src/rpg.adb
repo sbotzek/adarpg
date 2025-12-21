@@ -26,7 +26,8 @@ package body RPG is
             RPG.Player_Creation.Run_Pick_Class(G);
          when Main_Menu =>
             Put_Line("Main Menu!");
-            RPG.Types.Replace(G.Modes, Quit);
+            G.Modes.Delete_Last;
+            G.Modes.Append(Quit);
          when Quit =>
             Put_Line("Goodbye!");
       end case;

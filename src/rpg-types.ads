@@ -9,7 +9,6 @@ package RPG.Types is
       Element_Type => Game_Mode);
 
    subtype Game_Mode_Stack_T is Game_Mode_Stack.Vector;
-   procedure Replace(S : in out Game_Mode_Stack_T; M : Game_Mode);
 
    package Creature_Name is new Text_Bounded(Min => 3, Max => 20);
 
