@@ -45,7 +45,6 @@ package body RPG.Player_Creation is
    end Run_Pick_Name;
 
    procedure Run_Pick_Class(G : in out Game) is
-      use RPG.Classes;
    begin
       Put_Line("Choose a class:");
       declare
@@ -53,7 +52,7 @@ package body RPG.Player_Creation is
       begin
          for Id in Class_Id loop
             Index := Index + 1;
-            Put_Line(Index'Image & ". " & Class_Name.To_String(Find_Class(Id).Name));
+            Put_Line(Index'Image & ". " & Class_Name.To_String(RPG.Classes.Find_Class(Id).Name));
          end loop;
       end;
 
@@ -75,6 +74,7 @@ package body RPG.Player_Creation is
             Index := Index + 1;
             if Index = Choice then
                G.Player_Class_Id := Id;
+               RPG.Classes.Initialize_Creature(G.Player_Creature, Id, 1);
                G.Modes.Delete_Last;
                G.Modes.Append(Main_Menu);
                exit;
