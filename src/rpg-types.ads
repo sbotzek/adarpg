@@ -1,4 +1,5 @@
 with Ada.Containers.Vectors;
+with RPG.Dice;
 with Text_Bounded;
 
 package RPG.Types is
@@ -18,6 +19,7 @@ package RPG.Types is
    type Class is record
       Id : Class_Id := Cleric;
       Name : Class_Name.T;
+      HP_Per_Level : RPG.Dice.Dieroll;
    end record;
 
    -- Creature
