@@ -19,6 +19,7 @@ package body RPG is
 
    procedure Game_Loop(G : in out Game) is
    begin
+      Put_Line("");
       case G.Modes.Last_Element is
          when Pick_Name =>
             RPG.Player_Creation.Run_Pick_Name(G);

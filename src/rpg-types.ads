@@ -10,11 +10,23 @@ package RPG.Types is
 
    subtype Game_Mode_Stack_T is Game_Mode_Stack.Vector;
 
-   package Creature_Name is new Text_Bounded(Min => 3, Max => 20);
+   -- Class
+   type Optional_Class_Id is (None, Cleric, Fighter, Thief, Wizard)
+     with Default_Value => None;
+   subtype Class_Id is Optional_Class_Id range Cleric .. Wizard;
+   package Class_Name is new Text_Bounded(Min => 3, Max => 20);
+   type Class is record
+      Id : Class_Id := Cleric;
+      Name : Class_Name.T;
+   end record;
 
+   -- Creature
+   package Creature_Name is new Text_Bounded(Min => 3, Max => 20);
    type Creature is record
       Name : Creature_Name.T;
+      Class_Id : Optional_Class_Id;
    end record;
+
 
    type Game is record
       Modes           : Game_Mode_Stack_T;

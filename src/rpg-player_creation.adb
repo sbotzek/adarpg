@@ -2,6 +2,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Strings; use Ada.Strings;
 with Ada.Strings.Fixed; use Ada.Strings.Fixed;
 with Ada.Characters.Handling; use Ada.Characters.Handling;
+with RPG.Classes;
 with RPG.Types; use RPG.Types;
 
 package body RPG.Player_Creation is
@@ -44,9 +45,47 @@ package body RPG.Player_Creation is
    end Run_Pick_Name;
 
    procedure Run_Pick_Class(G : in out Game) is
+      use RPG.Classes;
    begin
-      Put_Line("Pick Class!");
-      G.Modes.Delete_Last;
-      G.Modes.Append(Main_Menu);
+      Put_Line("Choose a class:");
+      declare
+         Index : Natural := 0;
+      begin
+         for Id in Class_Id loop
+            Index := Index + 1;
+            Put_Line(Index'Image & ". " & Class_Name.To_String(Find_Class(Id).Name));
+         end loop;
+      end;
+
+      Put("Enter a number: ");
+      declare
+         Input   : constant String := Trim(Get_Line, Both);
+         Choice  : Natural;
+         Index   : Natural := 0;
+         Found   : Boolean := False;
+      begin
+         begin
+            Choice := Natural'Value(Input);
+         exception
+            when Constraint_Error =>
+               Put_Line("Please enter a valid number.");
+               return;
+         end;
+
+         for Id in Class_Id loop
+            Index := Index + 1;
+            if Index = Choice then
+               G.Player_Creature.Class_Id := Id;
+               G.Modes.Delete_Last;
+               G.Modes.Append(Main_Menu);
+               exit;
+            end if;
+         end loop;
+
+         if G.Player_Creature.Class_Id = None then
+            Put_Line("Invalid number.");
+            return;
+         end if;
+      end;
    end Run_Pick_class;
 end RPG.Player_Creation;
