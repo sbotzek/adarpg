@@ -16,13 +16,11 @@ package body RPG.Player_Creation is
    end Is_Valid_Name;
 
    procedure Run_Pick_Name(G : in out Game) is
-      Input : String(1 .. 100);
-      Last  : Natural;
    begin
       Put("Enter your name: ");
-      Get_Line(Input, Last);
       declare
-         Trimmed : constant String := Trim(Input(1 .. Last), Both);
+         Input   : constant String := Get_Line;
+         Trimmed : constant String := Trim(Input, Both);
       begin
          if Trimmed'Length < Creature_Name.Min_Length then
             Put_Line("Error: Name too short (min" & Creature_Name.Min_Length'Image & " characters) ");
