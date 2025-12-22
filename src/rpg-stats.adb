@@ -73,4 +73,14 @@ package body RPG.Stats is
          HP.Current := Creature_Current_HP(Max_Value);
       end if;
    end Modify_Maximum;
+
+   function Defense (S : Creature_Stats) return Natural is
+   begin
+      return 10 + Natural(Agility.Value(S.Agility)) / 2;
+   end Defense;
+
+   function Is_Dead (HP : Creature_HP) return Boolean is
+   begin
+      return HP.Current = 0;
+   end Is_Dead;
 end RPG.Stats;

@@ -4,7 +4,7 @@ with Text_Bounded;
 with RPG.Stats; use RPG.Stats;
 
 package RPG.Types is
-   type Game_Mode is (Pick_Name, Pick_Class, Main_Menu, Quit);
+   type Game_Mode is (Pick_Name, Pick_Class, Main_Menu, Fight, Quit);
 
    package Game_Mode_Stack is new Ada.Containers.Vectors
      (Index_Type   => Positive,
@@ -25,7 +25,7 @@ package RPG.Types is
 
    -- Creature
    package Creature_Name is new Text_Bounded(Min => 3, Max => 20);
-   type Creature_Level is new Natural with Default_Value => 0;
+   type Creature_Level is new Natural range 0 .. 20 with Default_Value => 0;
 
    type Creature is record
       Name : Creature_Name.T;

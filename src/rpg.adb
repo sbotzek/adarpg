@@ -1,5 +1,7 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with RPG.Player_Creation;
+with RPG.Combat;
+with RPG.Stats;
 with RPG.Types; use RPG.Types;
 
 package body RPG is
@@ -27,6 +29,18 @@ package body RPG is
             RPG.Player_Creation.Run_Pick_Class(G);
          when Main_Menu =>
             Put_Line("Main Menu!");
+            -- After main menu, start a fight
+            RPG.Stats.Full_Heal(G.Player_Creature.Stats.HP);
+            G.Modes.Delete_Last;
+            G.Modes.Append(Fight);
+         when Fight =>
+            declare
+               F : RPG.Combat.Fight := RPG.Combat.Random_Fight(G.Player_Creature);
+            begin
+               RPG.Combat.Run_Fight(F);
+               -- Update player creature state after fight
+               G.Player_Creature := F.Fighter1;
+            end;
             G.Modes.Delete_Last;
             G.Modes.Append(Quit);
          when Quit =>

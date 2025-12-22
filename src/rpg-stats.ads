@@ -2,9 +2,9 @@ with RPG.Stat;
 
 package RPG.Stats is
    -- HP
-   type Creature_Maximum_HP_Base is new Natural range 0 .. 9999 with Default_Value => 0;
-   type Creature_Maximum_HP_Modifier is new Integer range -9999 .. 9999 with Default_Value => 0;
-   type Creature_Maximum_HP_Effective is new Natural range 0 .. 19998 with Default_Value => 0;
+   type Creature_Maximum_HP_Base is new Natural range 0 .. 10_000 with Default_Value => 0;
+   type Creature_Maximum_HP_Modifier is new Integer with Default_Value => 0;
+   type Creature_Maximum_HP_Effective is new Natural range 0 .. 10_000 with Default_Value => 0;
    package Creature_Maximum_HP is new RPG.Stat
      (Base_Value      => Creature_Maximum_HP_Base,
       Modifier_Value  => Creature_Maximum_HP_Modifier,
@@ -25,9 +25,9 @@ package RPG.Stats is
    procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Modifier);
 
    -- Primary Stats
-   type Primary_Stat_Base is new Natural range 0 .. 99 with Default_Value => 0;
-   type Primary_Stat_Modifier is new Integer range -99 .. 99 with Default_Value => 0;
-   type Primary_Stat_Effective is new Natural range 0 .. 198 with Default_Value => 0;
+   type Primary_Stat_Base is new Natural range 0 .. 25 with Default_Value => 0;
+   type Primary_Stat_Modifier is new Integer with Default_Value => 0;
+   type Primary_Stat_Effective is new Natural range 0 .. 30 with Default_Value => 0;
 
    type Vigor_Base is new Primary_Stat_Base;
    type Vigor_Modifier is new Primary_Stat_Modifier;
@@ -70,4 +70,7 @@ package RPG.Stats is
    end record;
 
    procedure Roll_Primary_Stats (S : in out Creature_Stats);
+   function Defense (S : Creature_Stats) return Natural;
+
+   function Is_Dead (HP : Creature_HP) return Boolean;
 end RPG.Stats;
