@@ -4,6 +4,8 @@ with Text_Bounded;
 with RPG.Stats; use RPG.Stats;
 
 package RPG.Types is
+   -- See RPG.Stats for stat types.
+
    -- Class
    type Optional_Class_Id is (None, Cleric, Fighter, Thief, Wizard)
      with Default_Value => None;
