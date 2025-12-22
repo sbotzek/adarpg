@@ -4,14 +4,6 @@ with Text_Bounded;
 with RPG.Stats; use RPG.Stats;
 
 package RPG.Types is
-   type Game_Mode is (Pick_Name, Pick_Class, Main_Menu, Fight, Quit);
-
-   package Game_Mode_Stack is new Ada.Containers.Vectors
-     (Index_Type   => Positive,
-      Element_Type => Game_Mode);
-
-   subtype Game_Mode_Stack_T is Game_Mode_Stack.Vector;
-
    -- Class
    type Optional_Class_Id is (None, Cleric, Fighter, Thief, Wizard)
      with Default_Value => None;
@@ -32,6 +24,15 @@ package RPG.Types is
       Level : Creature_Level := 1;
       Stats : Creature_Stats;
    end record;
+
+   -- Top Level Game State
+   type Game_Mode is (Pick_Name, Pick_Class, Main_Menu, Fight, Quit);
+
+   package Game_Mode_Stack is new Ada.Containers.Vectors
+     (Index_Type   => Positive,
+      Element_Type => Game_Mode);
+
+   subtype Game_Mode_Stack_T is Game_Mode_Stack.Vector;
 
    type Game is record
       Modes           : Game_Mode_Stack_T;
