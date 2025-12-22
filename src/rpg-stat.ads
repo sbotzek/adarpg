@@ -4,8 +4,8 @@ generic
    type Effective_Value is range <>;
 package RPG.Stat is
    type T is record
-      Natural  : Natural_Value := 0;
-      Modified : Modified_Value := 0;
+      Natural  : Natural_Value;
+      Modified : Modified_Value;
    end record;
 
    function Value (S : T) return Effective_Value;

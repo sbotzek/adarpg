@@ -38,9 +38,7 @@ package body RPG.Classes is
    procedure Initialize_Creature(C : in out Creature; Id : Class_Id; Level : Creature_Level) is
    begin
       C.Level := 0;
-      C.Stats.HP.Maximum.Natural := 0;
-      C.Stats.HP.Maximum.Modified := 0;
-      C.Stats.HP.Current := 0;
+      C.Stats.HP := (others => <>);
       for I in 1 .. Level loop
          Level_Up(C, Id);
       end loop;
