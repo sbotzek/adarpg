@@ -8,7 +8,7 @@ package body RPG.Stats is
       S.Vigor.Base := Vigor_Base(RPG.Dice.Roll(Primary_Stat_Roll));
       S.Agility.Base := Agility_Base(RPG.Dice.Roll(Primary_Stat_Roll));
       S.Intelligence.Base := Intelligence_Base(RPG.Dice.Roll(Primary_Stat_Roll));
-      S.Charisma.Base := Charisma_Base(RPG.Dice.Roll(Primary_Stat_Roll));
+      S.Spirit.Base := Spirit_Base(RPG.Dice.Roll(Primary_Stat_Roll));
    end Roll_Primary_Stats;
    procedure Damage (HP : in out Creature_HP; Amount : Creature_Current_HP) is
    begin

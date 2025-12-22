@@ -53,20 +53,20 @@ package RPG.Stats is
       Modifier_Value  => Intelligence_Modifier,
       Effective_Value => Intelligence_Effective);
 
-   type Charisma_Base is new Primary_Stat_Base;
-   type Charisma_Modifier is new Primary_Stat_Modifier;
-   type Charisma_Effective is new Primary_Stat_Effective;
-   package Charisma is new RPG.Stat
-     (Base_Value      => Charisma_Base,
-      Modifier_Value  => Charisma_Modifier,
-      Effective_Value => Charisma_Effective);
+   type Spirit_Base is new Primary_Stat_Base;
+   type Spirit_Modifier is new Primary_Stat_Modifier;
+   type Spirit_Effective is new Primary_Stat_Effective;
+   package Spirit is new RPG.Stat
+     (Base_Value      => Spirit_Base,
+      Modifier_Value  => Spirit_Modifier,
+      Effective_Value => Spirit_Effective);
 
    type Creature_Stats is record
       HP           : Creature_HP;
       Vigor        : Stats.Vigor.T;
       Agility      : Stats.Agility.T;
       Intelligence : Stats.Intelligence.T;
-      Charisma     : Stats.Charisma.T;
+      Spirit       : Stats.Spirit.T;
    end record;
 
    procedure Roll_Primary_Stats (S : in out Creature_Stats);
