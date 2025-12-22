@@ -42,4 +42,35 @@ package body RPG.Stats is
       HP.Maximum.Natural := Creature_Maximum_HP_Natural(New_Natural);
       HP.Current := Creature_Current_HP(New_Current);
    end Increase_Maximum_Natural;
+
+   procedure Decrease_Maximum_Natural (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Natural) is
+      Max_Value : Natural;
+   begin
+      if Amount >= HP.Maximum.Natural then
+         HP.Maximum.Natural := 0;
+      else
+         HP.Maximum.Natural := HP.Maximum.Natural - Amount;
+      end if;
+      Max_Value := Natural(Creature_Maximum_HP.Value(HP.Maximum));
+      if Natural(HP.Current) > Max_Value then
+         HP.Current := Creature_Current_HP(Max_Value);
+      end if;
+   end Decrease_Maximum_Natural;
+
+   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Modified) is
+      New_Modified : constant Integer := Integer(HP.Maximum.Modified) + Integer(Amount);
+      Max_Value : Natural;
+   begin
+      if New_Modified < Integer(Creature_Maximum_HP_Modified'First) then
+         HP.Maximum.Modified := Creature_Maximum_HP_Modified'First;
+      elsif New_Modified > Integer(Creature_Maximum_HP_Modified'Last) then
+         HP.Maximum.Modified := Creature_Maximum_HP_Modified'Last;
+      else
+         HP.Maximum.Modified := Creature_Maximum_HP_Modified(New_Modified);
+      end if;
+      Max_Value := Natural(Creature_Maximum_HP.Value(HP.Maximum));
+      if Natural(HP.Current) > Max_Value then
+         HP.Current := Creature_Current_HP(Max_Value);
+      end if;
+   end Modify_Maximum;
 end RPG.Stats;

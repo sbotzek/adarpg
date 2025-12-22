@@ -21,6 +21,8 @@ package RPG.Stats is
    procedure Heal (HP : in Out Creature_HP; Amount : Creature_Current_HP);
    procedure Full_Heal (HP : in Out Creature_HP);
    procedure Increase_Maximum_Natural (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Natural);
+   procedure Decrease_Maximum_Natural (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Natural);
+   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Modified);
 
    -- Primary Stats
    type Primary_Stat_Natural is new Natural range 0 .. 99 with Default_Value => 0;
