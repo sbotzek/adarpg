@@ -1,11 +1,11 @@
 generic
-   type Natural_Value is range <>;
-   type Modified_Value is range <>;
+   type Base_Value is range <>;
+   type Modifier_Value is range <>;
    type Effective_Value is range <>;
 package RPG.Stat is
    type T is record
-      Natural  : Natural_Value;
-      Modified : Modified_Value;
+      Base     : Base_Value;
+      Modifier : Modifier_Value;
    end record;
 
    function Value (S : T) return Effective_Value;

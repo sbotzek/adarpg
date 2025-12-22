@@ -1,6 +1,6 @@
 package body RPG.Stat is
    function Value (S : T) return Effective_Value is
-      Total : constant Integer := Integer(S.Natural) + Integer(S.Modified);
+      Total : constant Integer := Integer(S.Base) + Integer(S.Modifier);
    begin
       if Total < Integer(Effective_Value'First) then
          return Effective_Value'First;
