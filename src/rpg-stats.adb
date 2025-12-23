@@ -1,14 +1,15 @@
 with RPG.Dice;
 
 package body RPG.Stats is
+   use type Creature_Maximum_HP.Base_T;
    Primary_Stat_Roll : constant RPG.Dice.Dieroll := (Number => 3, Size => 6, Bonus => 0);
 
    procedure Roll_Primary_Stats (S : in Out Creature_Stats) is
    begin
-      S.Vigor.Base := Vigor_Base(RPG.Dice.Roll(Primary_Stat_Roll));
-      S.Agility.Base := Agility_Base(RPG.Dice.Roll(Primary_Stat_Roll));
-      S.Intelligence.Base := Intelligence_Base(RPG.Dice.Roll(Primary_Stat_Roll));
-      S.Spirit.Base := Spirit_Base(RPG.Dice.Roll(Primary_Stat_Roll));
+      S.Vigor.Base := Vigor.Base_T(RPG.Dice.Roll(Primary_Stat_Roll));
+      S.Agility.Base := Agility.Base_T(RPG.Dice.Roll(Primary_Stat_Roll));
+      S.Intelligence.Base := Intelligence.Base_T(RPG.Dice.Roll(Primary_Stat_Roll));
+      S.Spirit.Base := Spirit.Base_T(RPG.Dice.Roll(Primary_Stat_Roll));
    end Roll_Primary_Stats;
    procedure Damage (HP : in out Creature_HP; Amount : Creature_Current_HP) is
    begin
@@ -35,15 +36,15 @@ package body RPG.Stats is
       HP.Current := Creature_Current_HP(Creature_Maximum_HP.Value(HP.Maximum));
    end Full_Heal;
 
-   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Base) is
+   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T) is
       New_Base : constant Natural := Natural(HP.Maximum.Base) + Natural(Amount);
       New_Current : constant Natural := Natural(HP.Current) + Natural(Amount);
    begin
-      HP.Maximum.Base := Creature_Maximum_HP_Base(New_Base);
+      HP.Maximum.Base := Creature_Maximum_HP.Base_T(New_Base);
       HP.Current := Creature_Current_HP(New_Current);
    end Increase_Maximum_Base;
 
-   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Base) is
+   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T) is
       Max_Value : Natural;
    begin
       if Amount >= HP.Maximum.Base then
@@ -57,16 +58,16 @@ package body RPG.Stats is
       end if;
    end Decrease_Maximum_Base;
 
-   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Modifier) is
+   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Modifier_T) is
       New_Modifier : constant Integer := Integer(HP.Maximum.Modifier) + Integer(Amount);
       Max_Value : Natural;
    begin
-      if New_Modifier < Integer(Creature_Maximum_HP_Modifier'First) then
-         HP.Maximum.Modifier := Creature_Maximum_HP_Modifier'First;
-      elsif New_Modifier > Integer(Creature_Maximum_HP_Modifier'Last) then
-         HP.Maximum.Modifier := Creature_Maximum_HP_Modifier'Last;
+      if New_Modifier < Integer(Creature_Maximum_HP.Modifier_T'First) then
+         HP.Maximum.Modifier := Creature_Maximum_HP.Modifier_T'First;
+      elsif New_Modifier > Integer(Creature_Maximum_HP.Modifier_T'Last) then
+         HP.Maximum.Modifier := Creature_Maximum_HP.Modifier_T'Last;
       else
-         HP.Maximum.Modifier := Creature_Maximum_HP_Modifier(New_Modifier);
+         HP.Maximum.Modifier := Creature_Maximum_HP.Modifier_T(New_Modifier);
       end if;
       Max_Value := Natural(Creature_Maximum_HP.Value(HP.Maximum));
       if Natural(HP.Current) > Max_Value then

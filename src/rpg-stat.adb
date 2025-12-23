@@ -1,13 +1,13 @@
 package body RPG.Stat is
-   function Value (S : T) return Effective_Value is
+   function Value (S : T) return Effective_T is
       Total : constant Integer := Integer(S.Base) + Integer(S.Modifier);
    begin
-      if Total < Integer(Effective_Value'First) then
-         return Effective_Value'First;
-      elsif Total > Integer(Effective_Value'Last) then
-         return Effective_Value'Last;
+      if Total < Integer(Effective_T'First) then
+         return Effective_T'First;
+      elsif Total > Integer(Effective_T'Last) then
+         return Effective_T'Last;
       else
-         return Effective_Value(Total);
+         return Effective_T(Total);
       end if;
    end Value;
 end RPG.Stat;

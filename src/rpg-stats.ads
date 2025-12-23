@@ -2,13 +2,12 @@ with RPG.Stat;
 
 package RPG.Stats is
    -- HP
-   type Creature_Maximum_HP_Base is new Natural range 0 .. 10_000 with Default_Value => 0;
-   type Creature_Maximum_HP_Modifier is new Integer with Default_Value => 0;
-   type Creature_Maximum_HP_Effective is new Natural range 0 .. 10_000 with Default_Value => 0;
    package Creature_Maximum_HP is new RPG.Stat
-     (Base_Value      => Creature_Maximum_HP_Base,
-      Modifier_Value  => Creature_Maximum_HP_Modifier,
-      Effective_Value => Creature_Maximum_HP_Effective);
+     (Base_Min      => 0,
+      Base_Max      => 10_000,
+      Base_Default  => 0,
+      Effective_Min => 0,
+      Effective_Max => 10_000);
 
    type Creature_Current_HP is new Natural with Default_Value => 0;
 
@@ -20,46 +19,38 @@ package RPG.Stats is
    procedure Damage (HP : in Out Creature_HP; Amount : Creature_Current_HP);
    procedure Heal (HP : in Out Creature_HP; Amount : Creature_Current_HP);
    procedure Full_Heal (HP : in Out Creature_HP);
-   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Base);
-   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Base);
-   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP_Modifier);
+   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T);
+   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T);
+   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Modifier_T);
 
    -- Primary Stats
-   type Primary_Stat_Base is new Natural range 0 .. 25 with Default_Value => 0;
-   type Primary_Stat_Modifier is new Integer with Default_Value => 0;
-   type Primary_Stat_Effective is new Natural range 0 .. 30 with Default_Value => 0;
-
-   type Vigor_Base is new Primary_Stat_Base;
-   type Vigor_Modifier is new Primary_Stat_Modifier;
-   type Vigor_Effective is new Primary_Stat_Effective;
    package Vigor is new RPG.Stat
-     (Base_Value      => Vigor_Base,
-      Modifier_Value  => Vigor_Modifier,
-      Effective_Value => Vigor_Effective);
+     (Base_Min      => 0,
+      Base_Max      => 25,
+      Base_Default  => 0,
+      Effective_Min => 0,
+      Effective_Max => 30);
 
-   type Agility_Base is new Primary_Stat_Base;
-   type Agility_Modifier is new Primary_Stat_Modifier;
-   type Agility_Effective is new Primary_Stat_Effective;
    package Agility is new RPG.Stat
-     (Base_Value      => Agility_Base,
-      Modifier_Value  => Agility_Modifier,
-      Effective_Value => Agility_Effective);
+     (Base_Min      => 0,
+      Base_Max      => 25,
+      Base_Default  => 0,
+      Effective_Min => 0,
+      Effective_Max => 30);
 
-   type Intelligence_Base is new Primary_Stat_Base;
-   type Intelligence_Modifier is new Primary_Stat_Modifier;
-   type Intelligence_Effective is new Primary_Stat_Effective;
    package Intelligence is new RPG.Stat
-     (Base_Value      => Intelligence_Base,
-      Modifier_Value  => Intelligence_Modifier,
-      Effective_Value => Intelligence_Effective);
+     (Base_Min      => 0,
+      Base_Max      => 25,
+      Base_Default  => 0,
+      Effective_Min => 0,
+      Effective_Max => 30);
 
-   type Spirit_Base is new Primary_Stat_Base;
-   type Spirit_Modifier is new Primary_Stat_Modifier;
-   type Spirit_Effective is new Primary_Stat_Effective;
    package Spirit is new RPG.Stat
-     (Base_Value      => Spirit_Base,
-      Modifier_Value  => Spirit_Modifier,
-      Effective_Value => Spirit_Effective);
+     (Base_Min      => 0,
+      Base_Max      => 25,
+      Base_Default  => 0,
+      Effective_Min => 0,
+      Effective_Max => 30);
 
    type Creature_Stats is record
       HP           : Creature_HP;
