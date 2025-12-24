@@ -1,5 +1,5 @@
 with Text_Bounded;
-with RPG.Stat;
+with RPG.Stats;
 with RPG.Primary_Stats; use RPG.Primary_Stats;
 
 package RPG.Creatures is
@@ -7,7 +7,7 @@ package RPG.Creatures is
    type Creature_Level is new Natural range 0 .. 20 with Default_Value => 0;
 
    -- HP
-   package Creature_Maximum_HP is new RPG.Stat
+   package Creature_Maximum_HP is new RPG.Stats
      (Base_Min      => 0,
       Base_Max      => 10_000,
       Base_Default  => 0,

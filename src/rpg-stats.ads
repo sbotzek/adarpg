@@ -4,7 +4,7 @@ generic
    Base_Default : Integer;
    Effective_Min : Integer;
    Effective_Max : Integer;
-package RPG.Stat is
+package RPG.Stats is
    type T is tagged private;
 
    type Base_T is private;
@@ -30,4 +30,4 @@ private
       Base     : Base_T := Base_T(Base_Default);
       Modifier : Modifier_T := 0;
    end record;
-end RPG.Stat;
+end RPG.Stats;
