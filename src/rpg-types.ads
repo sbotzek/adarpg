@@ -1,23 +1,12 @@
 with Ada.Containers.Vectors;
-with RPG.Dice;
-with Text_Bounded;
 with RPG.Stats; use RPG.Stats;
 with RPG.Creatures; use RPG.Creatures;
+with RPG.Classes; use RPG.Classes;
 
 package RPG.Types is
    -- See RPG.Stats for stat types.
    -- See RPG.Creatures for creature types.
-
-   -- Class
-   type Optional_Class_Id is (None, Cleric, Fighter, Thief, Wizard)
-     with Default_Value => None;
-   subtype Class_Id is Optional_Class_Id range Cleric .. Wizard;
-   package Class_Name is new Text_Bounded(Min => 3, Max => 20);
-   type Class is record
-      Id : Class_Id := Cleric;
-      Name : Class_Name.T;
-      HP_Per_Level : RPG.Dice.Dieroll;
-   end record;
+   -- See RPG.Classes for class types.
 
    -- Top Level Game State
    type Game_Mode is (Pick_Name, Pick_Class, Main_Menu, Fight, Quit);

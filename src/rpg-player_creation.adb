@@ -2,7 +2,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Strings; use Ada.Strings;
 with Ada.Strings.Fixed; use Ada.Strings.Fixed;
 with Ada.Characters.Handling; use Ada.Characters.Handling;
-with RPG.Classes;
+with RPG.Classes; use RPG.Classes;
 with RPG.Stats;
 with RPG.Types; use RPG.Types;
 with RPG.Creatures; use RPG.Creatures;

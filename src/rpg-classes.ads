@@ -1,8 +1,20 @@
-with RPG.Types; use RPG.Types;
+with Text_Bounded;
+with RPG.Dice;
 with RPG.Creatures; use RPG.Creatures;
 
 package RPG.Classes is
+   -- Class types
+   type Optional_Class_Id is (None, Cleric, Fighter, Thief, Wizard)
+     with Default_Value => None;
+   subtype Class_Id is Optional_Class_Id range Cleric .. Wizard;
+   package Class_Name is new Text_Bounded(Min => 3, Max => 20);
+   type Class is record
+      Id : Class_Id := Cleric;
+      Name : Class_Name.T;
+      HP_Per_Level : RPG.Dice.Dieroll;
+   end record;
+
    function Find_Class(Id : Class_Id) return Class;
-   procedure Level_Up(C : in out Creature; Id : Class_Id);
+   procedure Level_Up(C : in Out Creature; Id : Class_Id);
    procedure Initialize_Creature(C : in Out Creature; Id : Class_Id; Level : Creature_Level);
 end RPG.Classes;

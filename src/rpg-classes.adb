@@ -1,5 +1,4 @@
 with RPG.Dice;
-with RPG.Types; use RPG.Types;
 with RPG.Creatures; use RPG.Creatures;
 with RPG.Stats; use RPG.Stats;
 
