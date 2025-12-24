@@ -61,7 +61,7 @@ package RPG.Stats is
    end record;
 
    procedure Roll_Primary_Stats (S : in out Creature_Stats);
-   function Defense (S : Creature_Stats) return Natural;
+   function Defense (S : Creature_Stats) return Integer;
 
    function Is_Dead (HP : Creature_HP) return Boolean;
 end RPG.Stats;

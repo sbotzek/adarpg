@@ -6,10 +6,10 @@ package body RPG.Stats is
 
    procedure Roll_Primary_Stats (S : in Out Creature_Stats) is
    begin
-      S.Vigor.Base := Vigor.Base_T(RPG.Dice.Roll(Primary_Stat_Roll));
-      S.Agility.Base := Agility.Base_T(RPG.Dice.Roll(Primary_Stat_Roll));
-      S.Intelligence.Base := Intelligence.Base_T(RPG.Dice.Roll(Primary_Stat_Roll));
-      S.Spirit.Base := Spirit.Base_T(RPG.Dice.Roll(Primary_Stat_Roll));
+      S.Vigor.Set_Base(RPG.Stats.Vigor.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
+      S.Agility.Set_Base(RPG.Stats.Agility.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
+      S.Intelligence.Set_Base(RPG.Stats.Intelligence.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
+      S.Spirit.Set_Base(RPG.Stats.Spirit.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
    end Roll_Primary_Stats;
    procedure Damage (HP : in out Creature_HP; Amount : Creature_Current_HP) is
    begin
@@ -22,7 +22,7 @@ package body RPG.Stats is
 
    procedure Heal (HP : in Out Creature_HP; Amount : Creature_Current_HP) is
       New_Current : constant Natural := Natural(HP.Current) + Natural(Amount);
-      Max_Value   : constant Natural := Natural(HP.Maximum.Value);
+      Max_Value   : constant Natural := Natural(HP.Maximum.Value_To_Integer);
    begin
       if New_Current >= Max_Value then
          HP.Current := Creature_Current_HP(Max_Value);
@@ -33,51 +33,40 @@ package body RPG.Stats is
 
    procedure Full_Heal (HP : in Out Creature_HP) is
    begin
-      HP.Current := Creature_Current_HP(HP.Maximum.Value);
+      HP.Current := Creature_Current_HP(HP.Maximum.Value_To_Integer);
    end Full_Heal;
 
    procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T) is
-      New_Base : constant Natural := Natural(HP.Maximum.Base) + Natural(Amount);
-      New_Current : constant Natural := Natural(HP.Current) + Natural(Amount);
+      -- New_Base : constant Natural := Natural(HP.Maximum.Base) + Natural(Amount);
+      -- New_Current : constant Natural := Natural(HP.Current) + Natural(Amount);
    begin
-      HP.Maximum.Base := Creature_Maximum_HP.Base_T(New_Base);
-      HP.Current := Creature_Current_HP(New_Current);
+      HP.Maximum.Add_Base(Amount);
    end Increase_Maximum_Base;
 
    procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T) is
-      Max_Value : Natural;
+      Max_Value : Integer;
    begin
-      if Amount >= HP.Maximum.Base then
-         HP.Maximum.Base := 0;
-      else
-         HP.Maximum.Base := HP.Maximum.Base - Amount;
-      end if;
-      Max_Value := Natural(HP.Maximum.Value);
-      if Natural(HP.Current) > Max_Value then
+      HP.Maximum.Subtract_Base(Amount);
+      Max_Value := HP.Maximum.Value_To_Integer;
+      if Integer(HP.Current) > Max_Value then
          HP.Current := Creature_Current_HP(Max_Value);
       end if;
    end Decrease_Maximum_Base;
 
    procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Modifier_T) is
-      New_Modifier : constant Integer := Integer(HP.Maximum.Modifier) + Integer(Amount);
-      Max_Value : Natural;
+      Max_Value : Integer;
    begin
-      if New_Modifier < Integer(Creature_Maximum_HP.Modifier_T'First) then
-         HP.Maximum.Modifier := Creature_Maximum_HP.Modifier_T'First;
-      elsif New_Modifier > Integer(Creature_Maximum_HP.Modifier_T'Last) then
-         HP.Maximum.Modifier := Creature_Maximum_HP.Modifier_T'Last;
-      else
-         HP.Maximum.Modifier := Creature_Maximum_HP.Modifier_T(New_Modifier);
-      end if;
-      Max_Value := Natural(HP.Maximum.Value);
-      if Natural(HP.Current) > Max_Value then
+      HP.Maximum.Modify(Amount);
+
+      Max_Value := HP.Maximum.Value_To_Integer;
+      if Integer(HP.Current) > Max_Value then
          HP.Current := Creature_Current_HP(Max_Value);
       end if;
    end Modify_Maximum;
 
-   function Defense (S : Creature_Stats) return Natural is
+   function Defense (S : Creature_Stats) return Integer is
    begin
-      return 10 + Natural(S.Agility.Value) / 2;
+      return 10 + S.Agility.Value_To_Integer / 2;
    end Defense;
 
    function Is_Dead (HP : Creature_HP) return Boolean is

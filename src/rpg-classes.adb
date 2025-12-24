@@ -30,7 +30,7 @@ package body RPG.Classes is
         HP_Gain : Integer := RPG.Dice.Roll(C_Class.HP_Per_Level);
       begin
          if HP_Gain > 0 then
-            Increase_Maximum_Base(C.Stats.HP, Creature_Maximum_HP.Base_T(HP_Gain));
+            Increase_Maximum_Base(C.Stats.HP, Creature_Maximum_HP.To_Base(HP_Gain));
          end if;
       end;
    end Level_Up;

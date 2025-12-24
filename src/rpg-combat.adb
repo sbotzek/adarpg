@@ -34,7 +34,7 @@ package body RPG.Combat is
    begin
       -- Base attack: 1d20 + vigor bonus
       Attack_Roll := RPG.Dice.Roll((Number => 1, Size => 20, Bonus => 0));
-      Attack_Roll := Attack_Roll + Integer(Attacker.Stats.Vigor.Value) / 2;
+      Attack_Roll := Attack_Roll + Attacker.Stats.Vigor.Value_To_Integer / 2;
       if Attack_Roll < 0 then
          return 0;
       end if;
@@ -46,7 +46,7 @@ package body RPG.Combat is
    begin
       -- Base damage: 1d6 + vigor bonus
       Damage_Roll := RPG.Dice.Roll((Number => 1, Size => 6, Bonus => 0));
-      Damage_Roll := Damage_Roll + Integer(Attacker.Stats.Vigor.Value) / 4;
+      Damage_Roll := Damage_Roll + Attacker.Stats.Vigor.Value_To_Integer / 4;
       if Damage_Roll < 1 then
          Damage_Roll := 1;
       end if;
