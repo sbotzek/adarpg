@@ -25,12 +25,12 @@ package body RPG.Player_Creation is
          Input   : constant String := Get_Line;
          Trimmed : constant String := Trim(Input, Both);
       begin
-         if Trimmed'Length < Creatures.Creature_Name.Min_Length then
-            Put_Line("Error: Name too short (min" & Creatures.Creature_Name.Min_Length'Image & " characters) ");
+         if Trimmed'Length < Creature_Name.Min_Length then
+            Put_Line("Error: Name too short (min" & Creature_Name.Min_Length'Image & " characters) ");
             return;
          end if;
-         if Trimmed'Length > Creatures.Creature_Name.Max_Length then
-            Put_Line("Error: Name too long (max" & Creatures.Creature_Name.Max_Length'Image & " characters).");
+         if Trimmed'Length > Creature_Name.Max_Length then
+            Put_Line("Error: Name too long (max" & Creature_Name.Max_Length'Image & " characters).");
             return;
          end if;
          if not Is_Valid_Name(Trimmed) then
@@ -38,11 +38,11 @@ package body RPG.Player_Creation is
             return;
          end if;
 
-         G.Player_Creature.Name := Creatures.Creature_Name.Create(Trimmed);
+         G.Player_Creature.Name := Creature_Name.Create(Trimmed);
          G.Modes.Delete_Last;
          G.Modes.Append(Pick_Class);
 
-         Put_Line("Welcome, " & Creatures.Creature_Name.To_String(G.Player_Creature.Name) & "!");
+         Put_Line("Welcome, " & Creature_Name.To_String(G.Player_Creature.Name) & "!");
       end;
    end Run_Pick_Name;
 

@@ -1,13 +1,13 @@
 with RPG.Types;
-with RPG.Creatures;
+with RPG.Creatures; use RPG.Creatures;
 
 package RPG.Combat is
    type Fight is record
-      Fighter1 : RPG.Creatures.Creature;
-      Fighter2 : RPG.Creatures.Creature;
+      Fighter1 : Creature;
+      Fighter2 : Creature;
    end record;
 
-   function Random_Fight(Fighter1 : in RPG.Creatures.Creature) return Fight;
+   function Random_Fight(Fighter1 : in Creature) return Fight;
    procedure Run_Fight(F : in out Fight);
    procedure Run_Round(F : in out Fight);
 end RPG.Combat;
