@@ -1,7 +1,7 @@
 with RPG.Dice;
 
 package body RPG.Creatures is
-   use type Creature_Maximum_HP.Base_T;
+   use type Creature_Maximum_HP.Base;
    Primary_Stat_Roll : constant RPG.Dice.Dieroll := (Number => 3, Size => 6, Bonus => 0);
 
    procedure Damage (HP : in Out Creature_HP; Amount : Creature_Current_HP) is
@@ -29,12 +29,12 @@ package body RPG.Creatures is
       HP.Current := Creature_Current_HP(HP.Maximum.Value_To_Integer);
    end Full_Heal;
 
-   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T) is
+   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base) is
    begin
       HP.Maximum.Add_Base(Amount);
    end Increase_Maximum_Base;
 
-   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T) is
+   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base) is
       Max_Value : Integer;
    begin
       HP.Maximum.Subtract_Base(Amount);
@@ -44,7 +44,7 @@ package body RPG.Creatures is
       end if;
    end Decrease_Maximum_Base;
 
-   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Modifier_T) is
+   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Modifier) is
       Max_Value : Integer;
    begin
       HP.Maximum.Modify(Amount);

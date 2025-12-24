@@ -24,9 +24,9 @@ package RPG.Creatures is
    procedure Damage (HP : in Out Creature_HP; Amount : Creature_Current_HP);
    procedure Heal (HP : in Out Creature_HP; Amount : Creature_Current_HP);
    procedure Full_Heal (HP : in Out Creature_HP);
-   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T);
-   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T);
-   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Modifier_T);
+   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base);
+   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base);
+   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Modifier);
    function Is_Dead (HP : Creature_HP) return Boolean;
 
    type Creature_Stats is record
