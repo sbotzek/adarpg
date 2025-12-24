@@ -38,8 +38,7 @@ package body RPG.Player_Creation is
          end if;
 
          G.Player_Creature.Name := Creature_Name.Create(Trimmed);
-         G.Modes.Delete_Last;
-         G.Modes.Append(Pick_Class);
+         G.Replace_Mode(Pick_Class);
 
          Put_Line("Welcome, " & Creature_Name.To_String(G.Player_Creature.Name) & "!");
       end;
@@ -77,8 +76,7 @@ package body RPG.Player_Creation is
                G.Player_Class_Id := Id;
                Roll_Primary_Stats(G.Player_Creature.Stats);
                RPG.Classes.Initialize_Creature(G.Player_Creature, Id, 1);
-               G.Modes.Delete_Last;
-               G.Modes.Append(Main_Menu);
+               G.Replace_Mode(Main_Menu);
                exit;
             end if;
          end loop;

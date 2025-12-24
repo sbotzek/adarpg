@@ -11,7 +11,7 @@ package body RPG is
       G : Game_State;
    begin
       Put_Line ("Hello World!");
-      G.Modes.Append(Pick_Name);
+      G.Push_Mode(Pick_Name);
 
       loop
          exit when G.Modes.Last_Element = Quit;
@@ -31,8 +31,7 @@ package body RPG is
             Put_Line("Main Menu!");
             -- After main menu, start a fight
             RPG.Creatures.Full_Heal(G.Player_Creature.Stats.HP);
-            G.Modes.Delete_Last;
-            G.Modes.Append(Fight);
+            G.Replace_Mode(Fight);
          when Fight =>
             declare
                F : RPG.Combat.Fight := RPG.Combat.Random_Fight(G.Player_Creature);
@@ -41,8 +40,7 @@ package body RPG is
                -- Update player creature state after fight
                G.Player_Creature := F.Fighter1;
             end;
-            G.Modes.Delete_Last;
-            G.Modes.Append(Quit);
+            G.Replace_Mode(Quit);
          when Quit =>
             Put_Line("Goodbye!");
       end case;
