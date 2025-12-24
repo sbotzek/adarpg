@@ -1,7 +1,7 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with RPG.Player_Creation;
 with RPG.Combat;
-with RPG.Stats;
+with RPG.Creatures;
 with RPG.Game; use RPG.Game;
 
 package body RPG is
@@ -30,7 +30,7 @@ package body RPG is
          when Main_Menu =>
             Put_Line("Main Menu!");
             -- After main menu, start a fight
-            RPG.Stats.Full_Heal(G.Player_Creature.Stats.HP);
+            RPG.Creatures.Full_Heal(G.Player_Creature.Stats.HP);
             G.Modes.Delete_Last;
             G.Modes.Append(Fight);
          when Fight =>

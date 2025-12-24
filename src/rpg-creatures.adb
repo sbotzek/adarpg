@@ -1,17 +1,10 @@
 with RPG.Dice;
 
-package body RPG.Stats is
+package body RPG.Creatures is
    use type Creature_Maximum_HP.Base_T;
    Primary_Stat_Roll : constant RPG.Dice.Dieroll := (Number => 3, Size => 6, Bonus => 0);
 
-   procedure Roll_Primary_Stats (S : in Out Creature_Stats) is
-   begin
-      S.Vigor.Set_Base(RPG.Stats.Vigor.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
-      S.Agility.Set_Base(RPG.Stats.Agility.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
-      S.Intelligence.Set_Base(RPG.Stats.Intelligence.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
-      S.Spirit.Set_Base(RPG.Stats.Spirit.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
-   end Roll_Primary_Stats;
-   procedure Damage (HP : in out Creature_HP; Amount : Creature_Current_HP) is
+   procedure Damage (HP : in Out Creature_HP; Amount : Creature_Current_HP) is
    begin
       if Amount >= HP.Current then
          HP.Current := 0;
@@ -37,8 +30,6 @@ package body RPG.Stats is
    end Full_Heal;
 
    procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base_T) is
-      -- New_Base : constant Natural := Natural(HP.Maximum.Base) + Natural(Amount);
-      -- New_Current : constant Natural := Natural(HP.Current) + Natural(Amount);
    begin
       HP.Maximum.Add_Base(Amount);
    end Increase_Maximum_Base;
@@ -64,13 +55,21 @@ package body RPG.Stats is
       end if;
    end Modify_Maximum;
 
-   function Defense (S : Creature_Stats) return Integer is
-   begin
-      return 10 + S.Agility.Value_To_Integer / 2;
-   end Defense;
-
    function Is_Dead (HP : Creature_HP) return Boolean is
    begin
       return HP.Current = 0;
    end Is_Dead;
-end RPG.Stats;
+
+   procedure Roll_Primary_Stats (S : in Out Creature_Stats) is
+   begin
+      S.Vigor.Set_Base(Primary_Stats.Vigor.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
+      S.Agility.Set_Base(Primary_Stats.Agility.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
+      S.Intelligence.Set_Base(Primary_Stats.Intelligence.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
+      S.Spirit.Set_Base(Primary_Stats.Spirit.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
+   end Roll_Primary_Stats;
+
+   function Defense (S : Creature_Stats) return Integer is
+   begin
+      return 10 + S.Agility.Value_To_Integer / 2;
+   end Defense;
+end RPG.Creatures;

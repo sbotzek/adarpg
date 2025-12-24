@@ -1,6 +1,5 @@
 with RPG.Dice;
 with RPG.Creatures; use RPG.Creatures;
-with RPG.Stats; use RPG.Stats;
 
 package body RPG.Classes is
    Classes : constant array (Class_Id) of Class :=

@@ -1,7 +1,6 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Numerics.Discrete_Random;
 with RPG.Dice;
-with RPG.Stats; use RPG.Stats;
 with RPG.Classes; use RPG.Classes;
 with RPG.Game; use RPG.Game;
 with RPG.Creatures; use RPG.Creatures;
