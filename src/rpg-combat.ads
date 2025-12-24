@@ -1,4 +1,4 @@
-with RPG.Types;
+with RPG.Game;
 with RPG.Creatures; use RPG.Creatures;
 
 package RPG.Combat is

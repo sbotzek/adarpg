@@ -4,7 +4,7 @@ with Ada.Strings.Fixed; use Ada.Strings.Fixed;
 with Ada.Characters.Handling; use Ada.Characters.Handling;
 with RPG.Classes; use RPG.Classes;
 with RPG.Stats;
-with RPG.Types; use RPG.Types;
+with RPG.Game; use RPG.Game;
 with RPG.Creatures; use RPG.Creatures;
 
 package body RPG.Player_Creation is
@@ -18,7 +18,7 @@ package body RPG.Player_Creation is
       return True;
    end Is_Valid_Name;
 
-   procedure Run_Pick_Name(G : in out Game) is
+   procedure Run_Pick_Name(G : in out Game_State) is
    begin
       Put("Enter your name: ");
       declare
@@ -46,7 +46,7 @@ package body RPG.Player_Creation is
       end;
    end Run_Pick_Name;
 
-   procedure Run_Pick_Class(G : in out Game) is
+   procedure Run_Pick_Class(G : in out Game_State) is
    begin
       Put_Line("Choose a class:");
       declare

@@ -2,13 +2,13 @@ with Ada.Text_IO; use Ada.Text_IO;
 with RPG.Player_Creation;
 with RPG.Combat;
 with RPG.Stats;
-with RPG.Types; use RPG.Types;
+with RPG.Game; use RPG.Game;
 
 package body RPG is
-   procedure Game_Loop(G : in out Game);
+   procedure Game_Loop(G : in out Game_State);
 
    procedure Run is
-      G : Game;
+      G : Game_State;
    begin
       Put_Line ("Hello World!");
       G.Modes.Append(Pick_Name);
@@ -19,7 +19,7 @@ package body RPG is
       end loop;
    end Run;
 
-   procedure Game_Loop(G : in out Game) is
+   procedure Game_Loop(G : in out Game_State) is
    begin
       Put_Line("");
       case G.Modes.Last_Element is
