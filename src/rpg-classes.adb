@@ -34,7 +34,7 @@ package body RPG.Classes is
       end;
    end Level_Up;
 
-   procedure Initialize_Creature(C : in Out Creature; Id : Class_Id; Level : Creature_Level) is
+   procedure Initialize_Creature(C : in out Creature; Id : Class_Id; Level : Creature_Level) is
    begin
       C.Level := 0;
       C.Stats.HP := (others => <>);

@@ -79,7 +79,7 @@ package body RPG.Combat is
       end if;
    end Attack;
 
-   procedure Run_Round(F : in Out Fight) is
+   procedure Run_Round(F : in out Fight) is
    begin
       if not Is_Dead(F.Fighter1.Stats.HP) and not Is_Dead(F.Fighter2.Stats.HP) then
          Attack(F.Fighter1, F.Fighter2);
@@ -90,7 +90,7 @@ package body RPG.Combat is
       end if;
    end Run_Round;
 
-   procedure Run_Fight(F : in Out Fight) is
+   procedure Run_Fight(F : in out Fight) is
       Round_Num : Natural := 0;
    begin
       Put_Line("=== COMBAT BEGINS ===");

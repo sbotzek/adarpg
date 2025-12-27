@@ -14,13 +14,13 @@ package RPG.Stats is
    function To_Base(V : Integer) return Base;
 
    procedure Set_Base(S : in out T; Amount : Base);
-   procedure Add_Base(S : in Out T; Amount : Base);
-   procedure Subtract_Base(S : in Out T; Amount : Base);
+   procedure Add_Base(S : in out T; Amount : Base);
+   procedure Subtract_Base(S : in out T; Amount : Base);
 
-   procedure Modify(S : in Out T; Amount : Modifier);
+   procedure Modify(S : in out T; Amount : Modifier);
 
-   function Value (S : T) return Effective;
-   function Value_To_Integer (S : T) return Integer;
+   function Value(S : T) return Effective;
+   function Value_To_Integer(S : T) return Integer;
 private
    type Base is new Integer range Base_Min .. Base_Max;
    type Modifier is new Integer;

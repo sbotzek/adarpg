@@ -21,13 +21,13 @@ package RPG.Creatures is
       Current : Creature_Current_HP;
    end record;
 
-   procedure Damage (HP : in Out Creature_HP; Amount : Creature_Current_HP);
-   procedure Heal (HP : in Out Creature_HP; Amount : Creature_Current_HP);
-   procedure Full_Heal (HP : in Out Creature_HP);
-   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base);
-   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base);
-   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Modifier);
-   function Is_Dead (HP : Creature_HP) return Boolean;
+   procedure Damage(HP : in out Creature_HP; Amount : Creature_Current_HP);
+   procedure Heal(HP : in out Creature_HP; Amount : Creature_Current_HP);
+   procedure Full_Heal(HP : in out Creature_HP);
+   procedure Increase_Maximum_Base(HP : in out Creature_HP; Amount : Creature_Maximum_HP.Base);
+   procedure Decrease_Maximum_Base(HP : in out Creature_HP; Amount : Creature_Maximum_HP.Base);
+   procedure Modify_Maximum(HP : in out Creature_HP; Amount : Creature_Maximum_HP.Modifier);
+   function Is_Dead(HP : Creature_HP) return Boolean;
 
    type Creature_Stats is record
       HP           : Creature_HP;
@@ -37,8 +37,8 @@ package RPG.Creatures is
       Spirit       : Primary_Stats.Spirit.T;
    end record;
 
-   procedure Roll_Primary_Stats (S : in Out Creature_Stats);
-   function Defense (S : Creature_Stats) return Integer;
+   procedure Roll_Primary_Stats(S : in out Creature_Stats);
+   function Defense(S : Creature_Stats) return Integer;
 
    type Creature is record
       Name : Creature_Name.T;

@@ -10,7 +10,7 @@ package body RPG is
    procedure Run is
       G : Game_State;
    begin
-      Put_Line ("Hello World!");
+      Put_Line("Hello World!");
       G.Push_Mode(Pick_Name);
 
       loop

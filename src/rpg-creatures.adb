@@ -4,7 +4,7 @@ package body RPG.Creatures is
    use type Creature_Maximum_HP.Base;
    Primary_Stat_Roll : constant RPG.Dice.Dieroll := (Number => 3, Size => 6, Bonus => 0);
 
-   procedure Damage (HP : in Out Creature_HP; Amount : Creature_Current_HP) is
+   procedure Damage(HP : in out Creature_HP; Amount : Creature_Current_HP) is
    begin
       if Amount >= HP.Current then
          HP.Current := 0;
@@ -13,7 +13,7 @@ package body RPG.Creatures is
       end if;
    end Damage;
 
-   procedure Heal (HP : in Out Creature_HP; Amount : Creature_Current_HP) is
+   procedure Heal(HP : in out Creature_HP; Amount : Creature_Current_HP) is
       New_Current : constant Natural := Natural(HP.Current) + Natural(Amount);
       Max_Value   : constant Natural := Natural(HP.Maximum.Value_To_Integer);
    begin
@@ -24,17 +24,17 @@ package body RPG.Creatures is
       end if;
    end Heal;
 
-   procedure Full_Heal (HP : in Out Creature_HP) is
+   procedure Full_Heal(HP : in out Creature_HP) is
    begin
       HP.Current := Creature_Current_HP(HP.Maximum.Value_To_Integer);
    end Full_Heal;
 
-   procedure Increase_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base) is
+   procedure Increase_Maximum_Base(HP : in out Creature_HP; Amount : Creature_Maximum_HP.Base) is
    begin
       HP.Maximum.Add_Base(Amount);
    end Increase_Maximum_Base;
 
-   procedure Decrease_Maximum_Base (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Base) is
+   procedure Decrease_Maximum_Base(HP : in out Creature_HP; Amount : Creature_Maximum_HP.Base) is
       Max_Value : Integer;
    begin
       HP.Maximum.Subtract_Base(Amount);
@@ -44,7 +44,7 @@ package body RPG.Creatures is
       end if;
    end Decrease_Maximum_Base;
 
-   procedure Modify_Maximum (HP : in Out Creature_HP; Amount : Creature_Maximum_HP.Modifier) is
+   procedure Modify_Maximum(HP : in out Creature_HP; Amount : Creature_Maximum_HP.Modifier) is
       Max_Value : Integer;
    begin
       HP.Maximum.Modify(Amount);
@@ -55,12 +55,12 @@ package body RPG.Creatures is
       end if;
    end Modify_Maximum;
 
-   function Is_Dead (HP : Creature_HP) return Boolean is
+   function Is_Dead(HP : Creature_HP) return Boolean is
    begin
       return HP.Current = 0;
    end Is_Dead;
 
-   procedure Roll_Primary_Stats (S : in Out Creature_Stats) is
+   procedure Roll_Primary_Stats(S : in out Creature_Stats) is
    begin
       S.Vigor.Set_Base(Primary_Stats.Vigor.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
       S.Agility.Set_Base(Primary_Stats.Agility.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
@@ -68,7 +68,7 @@ package body RPG.Creatures is
       S.Spirit.Set_Base(Primary_Stats.Spirit.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
    end Roll_Primary_Stats;
 
-   function Defense (S : Creature_Stats) return Integer is
+   function Defense(S : Creature_Stats) return Integer is
    begin
       return 10 + S.Agility.Value_To_Integer / 2;
    end Defense;
