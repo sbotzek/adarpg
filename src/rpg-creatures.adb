@@ -2,7 +2,6 @@ with RPG.Dice;
 
 package body RPG.Creatures is
    use type Creature_Maximum_HP.Base;
-   Primary_Stat_Roll : constant RPG.Dice.Dieroll := (Number => 3, Size => 6, Bonus => 0);
 
    procedure Damage(HP : in out Creature_HP; Amount : Creature_Current_HP) is
    begin
@@ -60,16 +59,8 @@ package body RPG.Creatures is
       return HP.Current = 0;
    end Is_Dead;
 
-   procedure Roll_Primary_Stats(S : in out Creature_Stats) is
-   begin
-      S.Vigor.Set_Base(Primary_Stats.Vigor.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
-      S.Agility.Set_Base(Primary_Stats.Agility.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
-      S.Intelligence.Set_Base(Primary_Stats.Intelligence.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
-      S.Spirit.Set_Base(Primary_Stats.Spirit.To_Base(RPG.Dice.Roll(Primary_Stat_Roll)));
-   end Roll_Primary_Stats;
-
    function Defense(S : Creature_Stats) return Integer is
    begin
-      return 10 + S.Agility.Value_To_Integer / 2;
+      return 10 + S.Primary.Agility.Value_To_Integer / 2;
    end Defense;
 end RPG.Creatures;

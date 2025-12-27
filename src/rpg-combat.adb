@@ -4,6 +4,7 @@ with RPG.Dice;
 with RPG.Classes; use RPG.Classes;
 with RPG.Game; use RPG.Game;
 with RPG.Creatures; use RPG.Creatures;
+with RPG.Primary_Stats;
 
 package body RPG.Combat is
    package Random_Natural is new Ada.Numerics.Discrete_Random(Natural);
@@ -22,7 +23,7 @@ package body RPG.Combat is
       end if;
 
       F.Fighter2.Name := Creature_Name.Create("Goblin");
-      Roll_Primary_Stats(F.Fighter2.Stats);
+      RPG.Primary_Stats.Roll(F.Fighter2.Stats.Primary);
       RPG.Classes.Initialize_Creature(F.Fighter2, Fighter, Enemy_Level);
       Full_Heal(F.Fighter2.Stats.HP);
 
@@ -34,7 +35,7 @@ package body RPG.Combat is
    begin
       -- Base attack: 1d20 + vigor bonus
       Attack_Roll := RPG.Dice.Roll((Number => 1, Size => 20, Bonus => 0));
-      Attack_Roll := Attack_Roll + Attacker.Stats.Vigor.Value_To_Integer / 2;
+      Attack_Roll := Attack_Roll + Attacker.Stats.Primary.Vigor.Value_To_Integer / 2;
       if Attack_Roll < 0 then
          return 0;
       end if;
@@ -46,7 +47,7 @@ package body RPG.Combat is
    begin
       -- Base damage: 1d6 + vigor bonus
       Damage_Roll := RPG.Dice.Roll((Number => 1, Size => 6, Bonus => 0));
-      Damage_Roll := Damage_Roll + Attacker.Stats.Vigor.Value_To_Integer / 4;
+      Damage_Roll := Damage_Roll + Attacker.Stats.Primary.Vigor.Value_To_Integer / 4;
       if Damage_Roll < 1 then
          Damage_Roll := 1;
       end if;

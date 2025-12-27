@@ -1,6 +1,6 @@
 with Text_Bounded;
 with RPG.Stats;
-with RPG.Primary_Stats; use RPG.Primary_Stats;
+with RPG.Primary_Stats;
 
 package RPG.Creatures is
    package Creature_Name is new Text_Bounded(Min => 3, Max => 20);
@@ -31,13 +31,9 @@ package RPG.Creatures is
 
    type Creature_Stats is record
       HP           : Creature_HP;
-      Vigor        : Primary_Stats.Vigor.T;
-      Agility      : Primary_Stats.Agility.T;
-      Intelligence : Primary_Stats.Intelligence.T;
-      Spirit       : Primary_Stats.Spirit.T;
+      Primary : RPG.Primary_Stats.Primary_Stat_Values;
    end record;
 
-   procedure Roll_Primary_Stats(S : in out Creature_Stats);
    function Defense(S : Creature_Stats) return Integer;
 
    type Creature is record
