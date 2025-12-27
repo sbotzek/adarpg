@@ -23,7 +23,7 @@ package body RPG.Combat is
       end if;
 
       F.Fighter2.Name := Creature_Name.Create("Goblin");
-      RPG.Primary_Stats.Roll(F.Fighter2.Stats.Primary);
+      F.Fighter2.Stats.Primary := RPG.Primary_Stats.Roll;
       RPG.Classes.Initialize_Creature(F.Fighter2, Fighter, Enemy_Level);
       Full_Heal(F.Fighter2.Stats.HP);
 

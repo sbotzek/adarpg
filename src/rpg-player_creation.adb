@@ -75,7 +75,7 @@ package body RPG.Player_Creation is
             Index := Index + 1;
             if Index = Choice then
                G.Player_Class_Id := Id;
-               RPG.Primary_Stats.Roll(G.Player_Creature.Stats.Primary);
+               G.Player_Creature.Stats.Primary := RPG.Primary_Stats.Roll;
                RPG.Classes.Initialize_Creature(G.Player_Creature, Id, 1);
                G.Replace_Mode(Main_Menu);
                exit;

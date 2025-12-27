@@ -38,5 +38,5 @@ package RPG.Primary_Stats is
       Spirit       : Primary_Stats.Spirit.T;
    end record;
 
-   procedure Roll(S : in out Primary_Stat_Values);
+   function Roll return Primary_Stat_Values;
 end RPG.Primary_Stats;
