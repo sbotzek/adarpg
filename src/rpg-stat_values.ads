@@ -4,7 +4,7 @@ generic
    Base_Default : Integer;
    Effective_Min : Integer;
    Effective_Max : Integer;
-package RPG.Stats is
+package RPG.Stat_Values is
    type T is tagged private;
 
    type Base is private;
@@ -27,7 +27,7 @@ private
    type Effective is new Integer range Effective_Min .. Effective_Max;
 
    type T is tagged record
-      Base     : Stats.Base := Stats.Base(Base_Default);
-      Modifier : Stats.Modifier := 0;
+      Base     : Stat_Values.Base := Stat_Values.Base(Base_Default);
+      Modifier : Stat_Values.Modifier := 0;
    end record;
-end RPG.Stats;
+end RPG.Stat_Values;

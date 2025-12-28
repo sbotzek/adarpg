@@ -1,30 +1,30 @@
-with RPG.Stats;
+with RPG.Stat_Values;
 
 package RPG.Primary_Stats is
    type Primary_Stat_Id is (Vigor_Id, Agility_Id, Intelligence_Id, Spirit_Id);
 
-   package Vigor is new RPG.Stats
+   package Vigor is new RPG.Stat_Values
      (Base_Min      => 0,
       Base_Max      => 25,
       Base_Default  => 0,
       Effective_Min => 0,
       Effective_Max => 30);
 
-   package Agility is new RPG.Stats
+   package Agility is new RPG.Stat_Values
      (Base_Min      => 0,
       Base_Max      => 25,
       Base_Default  => 0,
       Effective_Min => 0,
       Effective_Max => 30);
 
-   package Intelligence is new RPG.Stats
+   package Intelligence is new RPG.Stat_Values
      (Base_Min      => 0,
       Base_Max      => 25,
       Base_Default  => 0,
       Effective_Min => 0,
       Effective_Max => 30);
 
-   package Spirit is new RPG.Stats
+   package Spirit is new RPG.Stat_Values
      (Base_Min      => 0,
       Base_Max      => 25,
       Base_Default  => 0,

@@ -1,4 +1,4 @@
-package body RPG.Stats is
+package body RPG.Stat_Values is
 
    function To_Base(V : Integer) return Base is
    begin
@@ -44,4 +44,4 @@ package body RPG.Stats is
       return Integer(S.Value);
    end Value_To_Integer;
 
-end RPG.Stats;
+end RPG.Stat_Values;
