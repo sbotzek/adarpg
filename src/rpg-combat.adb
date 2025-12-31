@@ -1,14 +1,17 @@
 with Ada.Text_IO; use Ada.Text_IO;
-with Ada.Numerics.Discrete_Random;
+with Ada.Numerics.Float_Random;
+with GNAT.Formatted_String; use GNAT.Formatted_String;
 with RPG.Dice;
 with RPG.Classes; use RPG.Classes;
 with RPG.Game; use RPG.Game;
 with RPG.Creatures; use RPG.Creatures;
 with RPG.Primary_Stats;
+with RPG.Skills;
 
 package body RPG.Combat is
-   package Random_Natural is new Ada.Numerics.Discrete_Random(Natural);
-   Gen : Random_Natural.Generator;
+   package Float_Random renames Ada.Numerics.Float_Random;
+
+   Gen : Float_Random.Generator;
 
    function Random_Fight(Fighter1 : in Creature) return Fight is
       F : Fight;
@@ -30,17 +33,10 @@ package body RPG.Combat is
       return F;
    end Random_Fight;
 
-   function Make_Attack_Roll(Attacker : Creature) return Natural is
-      Attack_Roll : Integer;
+   function Random_Hit_Roll return Hit_Roll is
    begin
-      -- Base attack: 1d20 + vigor bonus
-      Attack_Roll := RPG.Dice.Roll((Number => 1, Size => 20, Bonus => 0));
-      Attack_Roll := Attack_Roll + Attacker.Stats.Primary.Vigor.Value_To_Integer / 2;
-      if Attack_Roll < 0 then
-         return 0;
-      end if;
-      return Natural(Attack_Roll);
-   end Make_Attack_Roll;
+      return Hit_Roll(Float_Random.Random(Gen));
+   end Random_Hit_Roll;
 
    function Calculate_Damage(Attacker : Creature) return Creature_Current_HP is
       Damage_Roll : Integer;
@@ -54,27 +50,25 @@ package body RPG.Combat is
       return Creature_Current_HP(Damage_Roll);
    end Calculate_Damage;
 
-   procedure Attack(Attacker : in Creature; Defender : in out Creature) is
-      Attack_Roll : Natural;
-      Defense_Value : Natural;
+   procedure Attack(Attacker : in Creature; Defender : in Out Creature) is
+      Attacker_Hit_Roll : Hit_Roll := Random_Hit_Roll;
+      Defense_Value : Creature_Defense := Defense(Defender.Stats);
+      Attack_Value : Integer := Defender.Stats.Skills.Timing.Value_To_Integer(Defender.Stats.Primary);
+      Hit_Chance : Hit_Roll := Hit_Roll(Float(Attack_Value) / (0.001 + Float(Defense_Value)));
       Damage_Amount : Creature_Current_HP;
    begin
-      Attack_Roll := Make_Attack_Roll(Attacker);
-      Defense_Value := Defense(Defender.Stats);
+      Put(-(+"%s attacks %s (%d vs %d - chance %.2f, roll %.2f): "
+            & Creature_Name.To_String(Attacker.Name)
+            & Creature_Name.To_String(Defender.Name)
+            & Attack_Value
+            & Integer(Defense_Value)
+            & Float(Hit_Chance)
+            & Float(Attacker_Hit_Roll)));
 
-      Put(Creature_Name.To_String(Attacker.Name));
-      Put(" attacks ");
-      Put(Creature_Name.To_String(Defender.Name));
-      Put(" (");
-      Put(Natural'Image(Attack_Roll));
-      Put(" vs");
-      Put(Natural'Image(Defense_Value));
-      Put("): ");
-
-      if Attack_Roll >= Defense_Value then
+      if Attacker_Hit_Roll <= Hit_Chance then
          Damage_Amount := Calculate_Damage(Attacker);
          Damage(Defender.Stats.HP, Damage_Amount);
-         Put_Line("Hit for" & Creature_Current_HP'Image(Damage_Amount) & " damage!");
+         Put_Line(-(+"Hit for %d damage!" & Integer(Damage_Amount)));
       else
          Put_Line("Miss!");
       end if;
@@ -126,5 +120,5 @@ package body RPG.Combat is
    end Run_Fight;
 
 begin
-   Random_Natural.Reset(Gen);
+   Float_Random.Reset(Gen);
 end RPG.Combat;

@@ -12,6 +12,7 @@ package RPG.Stat_Values is
    type Effective is private;
 
    function To_Base(V : Integer) return Base;
+   function To_Effective(V : Integer) return Effective;
 
    procedure Set_Base(S : in out T; Amount : Base);
    procedure Add_Base(S : in out T; Amount : Base);
@@ -21,6 +22,8 @@ package RPG.Stat_Values is
 
    function Value(S : T) return Effective;
    function Value_To_Integer(S : T) return Integer;
+
+   function Effective_To_Integer(E : Effective) return Integer;
 private
    type Base is new Integer range Base_Min .. Base_Max;
    type Modifier is new Integer;

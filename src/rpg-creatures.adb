@@ -59,8 +59,8 @@ package body RPG.Creatures is
       return HP.Current = 0;
    end Is_Dead;
 
-   function Defense(S : Creature_Stats) return Integer is
+   function Defense(S : Creature_Stats) return Creature_Defense is
    begin
-      return 10 + S.Primary.Agility.Value_To_Integer / 2;
+      return Creature_Defense(S.Skills.Reflex.Value_To_Integer(S.Primary) + S.Skills.Anticipation.Value_To_Integer(S.Primary));
    end Defense;
 end RPG.Creatures;

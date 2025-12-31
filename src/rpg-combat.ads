@@ -2,6 +2,8 @@ with RPG.Game;
 with RPG.Creatures; use RPG.Creatures;
 
 package RPG.Combat is
+   type Hit_Roll is new Float;
+
    type Fight is record
       Fighter1 : Creature;
       Fighter2 : Creature;

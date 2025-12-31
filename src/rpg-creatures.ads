@@ -1,6 +1,7 @@
 with Text_Bounded;
 with RPG.Stat_Values;
 with RPG.Primary_Stats;
+with RPG.Skills;
 
 package RPG.Creatures is
    package Creature_Name is new Text_Bounded(Min => 3, Max => 20);
@@ -32,9 +33,11 @@ package RPG.Creatures is
    type Creature_Stats is record
       HP           : Creature_HP;
       Primary : RPG.Primary_Stats.Primary_Stat_Values;
+      Skills : RPG.Skills.Skill_Proficiencies;
    end record;
 
-   function Defense(S : Creature_Stats) return Integer;
+   type Creature_Defense is new Integer;
+   function Defense(S : Creature_Stats) return Creature_Defense;
 
    type Creature is record
       Name : Creature_Name.T;

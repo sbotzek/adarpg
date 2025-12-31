@@ -5,6 +5,11 @@ package body RPG.Stat_Values is
       return Base(V);
    end To_Base;
 
+   function To_Effective(V : Integer) return Effective is
+   begin
+      return Effective(V);
+   end To_Effective;
+
    procedure Set_Base(S : in out T; Amount : Base) is
    begin
       S.Base := Amount;
@@ -43,5 +48,10 @@ package body RPG.Stat_Values is
    begin
       return Integer(S.Value);
    end Value_To_Integer;
+
+   function Effective_To_Integer(E : Effective) return Integer is
+   begin
+      return Integer(E);
+   end Effective_To_Integer;
 
 end RPG.Stat_Values;
