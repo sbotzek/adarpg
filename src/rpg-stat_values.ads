@@ -21,9 +21,8 @@ package RPG.Stat_Values is
    procedure Modify(S : in out T; Amount : Modifier);
 
    function Value(S : T) return Effective;
-   function Value_To_Integer(S : T) return Integer;
 
-   function Effective_To_Integer(E : Effective) return Integer;
+   function To_Integer(E : Effective) return Integer;
 private
    type Base is new Integer range Base_Min .. Base_Max;
    type Modifier is new Integer;

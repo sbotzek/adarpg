@@ -44,14 +44,9 @@ package body RPG.Stat_Values is
       end if;
    end Value;
 
-   function Value_To_Integer(S : T) return Integer is
-   begin
-      return Integer(S.Value);
-   end Value_To_Integer;
-
-   function Effective_To_Integer(E : Effective) return Integer is
+   function To_Integer(E : Effective) return Integer is
    begin
       return Integer(E);
-   end Effective_To_Integer;
+   end To_Integer;
 
 end RPG.Stat_Values;

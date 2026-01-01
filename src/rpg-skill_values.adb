@@ -4,13 +4,13 @@ package body RPG.Skill_Values is
    begin
       case Bonus_Stat is
          when Primary_Stats.Vigor_Id =>
-            return PSV.Vigor.Value_To_Integer;
+            return Primary_Stats.Vigor.To_Integer(PSV.Vigor.Value);
          when Primary_Stats.Agility_Id =>
-            return PSV.Agility.Value_To_Integer;
+            return Primary_Stats.Agility.To_Integer(PSV.Agility.Value);
          when Primary_Stats.Intelligence_Id =>
-            return PSV.Intelligence.Value_To_Integer;
+            return Primary_Stats.Intelligence.To_Integer(PSV.Intelligence.Value);
          when Primary_Stats.Spirit_Id =>
-            return PSV.Spirit.Value_To_Integer;
+            return Primary_Stats.Spirit.To_Integer(PSV.Spirit.Value);
       end case;
    end Get_Bonus;
 
@@ -37,7 +37,7 @@ package body RPG.Skill_Values is
    function Value (S : T; PSV : Primary_Stats.Primary_Stat_Values)
      return Effective
    is
-      Base_Value : constant Integer := S.Stat.Value_To_Integer;
+      Base_Value : constant Integer := Stats.To_Integer(S.Stat.Value);
       Bonus      : constant Integer := Get_Bonus (PSV);
       Total      : constant Integer := Base_Value + Bonus;
       Clamped    : Integer;
@@ -52,16 +52,9 @@ package body RPG.Skill_Values is
       return Stats.To_Effective (Clamped);
    end Value;
 
-   function Value_To_Integer (S : T; PSV : Primary_Stats.Primary_Stat_Values)
-     return Integer
-   is
+   function To_Integer (E : Effective) return Integer is
    begin
-      return Stats.Effective_To_Integer (Value (S, PSV));
-   end Value_To_Integer;
-
-   function Effective_To_Integer (E : Effective) return Integer is
-   begin
-      return Stats.Effective_To_Integer (Stats.Effective (E));
-   end Effective_To_Integer;
+      return Stats.To_Integer (Stats.Effective (E));
+   end To_Integer;
 
 end RPG.Skill_Values;

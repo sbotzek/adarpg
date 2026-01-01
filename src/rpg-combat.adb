@@ -43,7 +43,7 @@ package body RPG.Combat is
    begin
       -- Base damage: 1d6 + vigor bonus
       Damage_Roll := RPG.Dice.Roll((Number => 1, Size => 6, Bonus => 0));
-      Damage_Roll := Damage_Roll + Attacker.Stats.Primary.Vigor.Value_To_Integer / 4;
+      Damage_Roll := Damage_Roll + Primary_Stats.Vigor.To_Integer(Attacker.Stats.Primary.Vigor.Value) / 4;
       if Damage_Roll < 1 then
          Damage_Roll := 1;
       end if;
@@ -53,7 +53,7 @@ package body RPG.Combat is
    procedure Attack(Attacker : in Creature; Defender : in Out Creature) is
       Attacker_Hit_Roll : Hit_Roll := Random_Hit_Roll;
       Defense_Value : Creature_Defense := Defender.Stats.Defense;
-      Attack_Value : Integer := Skills.Timing.Effective_To_Integer(Defender.Stats.Timing);
+      Attack_Value : Integer := Skills.Timing.To_Integer(Defender.Stats.Timing);
       Hit_Chance : Hit_Roll := Hit_Roll(Float(Attack_Value) / (0.001 + Float(Defense_Value)));
       Damage_Amount : Creature_Current_HP;
    begin

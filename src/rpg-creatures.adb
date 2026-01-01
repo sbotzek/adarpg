@@ -14,7 +14,7 @@ package body RPG.Creatures is
 
    procedure Heal(HP : in out Creature_HP; Amount : Creature_Current_HP) is
       New_Current : constant Natural := Natural(HP.Current) + Natural(Amount);
-      Max_Value   : constant Natural := Natural(HP.Maximum.Value_To_Integer);
+      Max_Value   : constant Natural := Natural(Creature_Maximum_HP.To_Integer(HP.Maximum.Value));
    begin
       if New_Current >= Max_Value then
          HP.Current := Creature_Current_HP(Max_Value);
@@ -25,7 +25,7 @@ package body RPG.Creatures is
 
    procedure Full_Heal(HP : in out Creature_HP) is
    begin
-      HP.Current := Creature_Current_HP(HP.Maximum.Value_To_Integer);
+      HP.Current := Creature_Current_HP(Creature_Maximum_HP.To_Integer(HP.Maximum.Value));
    end Full_Heal;
 
    procedure Increase_Maximum_Base(HP : in out Creature_HP; Amount : Creature_Maximum_HP.Base) is
@@ -37,7 +37,7 @@ package body RPG.Creatures is
       Max_Value : Integer;
    begin
       HP.Maximum.Subtract_Base(Amount);
-      Max_Value := HP.Maximum.Value_To_Integer;
+      Max_Value := Creature_Maximum_HP.To_Integer(HP.Maximum.Value);
       if Integer(HP.Current) > Max_Value then
          HP.Current := Creature_Current_HP(Max_Value);
       end if;
@@ -48,7 +48,7 @@ package body RPG.Creatures is
    begin
       HP.Maximum.Modify(Amount);
 
-      Max_Value := HP.Maximum.Value_To_Integer;
+      Max_Value := Creature_Maximum_HP.To_Integer(HP.Maximum.Value);
       if Integer(HP.Current) > Max_Value then
          HP.Current := Creature_Current_HP(Max_Value);
       end if;
@@ -61,8 +61,8 @@ package body RPG.Creatures is
 
    function Defense(S : Creature_Stats) return Creature_Defense is
    begin
-      return Creature_Defense(Skills.Reflex.Effective_To_Integer(S.Reflex)
-                            + Skills.Anticipation.Effective_To_Integer(S.Anticipation));
+      return Creature_Defense(Skills.Reflex.To_Integer(S.Reflex)
+                            + Skills.Anticipation.To_Integer(S.Anticipation));
    end Defense;
 
    function Endurance(S : Creature_Stats) return Skills.Endurance.Effective is
