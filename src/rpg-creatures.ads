@@ -6,6 +6,7 @@ with RPG.Skills;
 package RPG.Creatures is
    package Creature_Name is new Text_Bounded(Min => 3, Max => 20);
    type Creature_Level is new Natural range 0 .. 20 with Default_Value => 0;
+   type Creature_Level_Interval is new Positive with Default_Value => 1;
 
    -- HP
    package Creature_Maximum_HP is new RPG.Stat_Values
