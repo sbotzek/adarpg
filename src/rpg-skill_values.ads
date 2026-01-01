@@ -33,6 +33,8 @@ package RPG.Skill_Values is
    function Value_To_Integer (S : T; PSV : Primary_Stats.Primary_Stat_Values)
      return Integer;
 
+   function Effective_To_Integer (E : Effective) return Integer;
+
 private
    type T is tagged record
       Stat : Stats.T;

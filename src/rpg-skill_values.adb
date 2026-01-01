@@ -59,4 +59,9 @@ package body RPG.Skill_Values is
       return Stats.Effective_To_Integer (Value (S, PSV));
    end Value_To_Integer;
 
+   function Effective_To_Integer (E : Effective) return Integer is
+   begin
+      return Stats.Effective_To_Integer (Stats.Effective (E));
+   end Effective_To_Integer;
+
 end RPG.Skill_Values;

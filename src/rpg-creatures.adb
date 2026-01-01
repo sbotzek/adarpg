@@ -61,6 +61,48 @@ package body RPG.Creatures is
 
    function Defense(S : Creature_Stats) return Creature_Defense is
    begin
-      return Creature_Defense(S.Skills.Reflex.Value_To_Integer(S.Primary) + S.Skills.Anticipation.Value_To_Integer(S.Primary));
+      return Creature_Defense(Skills.Reflex.Effective_To_Integer(S.Reflex)
+                            + Skills.Anticipation.Effective_To_Integer(S.Anticipation));
    end Defense;
+
+   function Endurance(S : Creature_Stats) return Skills.Endurance.Effective is
+   begin
+      return S.Skills.Endurance.Value(S.Primary);
+   end Endurance;
+
+   function Strength(S : Creature_Stats) return Skills.Strength.Effective is
+   begin
+      return S.Skills.Strength.Value(S.Primary);
+   end Strength;
+
+   function Reflex(S : Creature_Stats) return Skills.Reflex.Effective is
+   begin
+      return S.Skills.Reflex.Value(S.Primary);
+   end Reflex;
+
+   function Timing(S : Creature_Stats) return Skills.Timing.Effective is
+   begin
+      return S.Skills.Timing.Value(S.Primary);
+   end Timing;
+
+   function Anticipation(S : Creature_Stats) return Skills.Anticipation.Effective is
+   begin
+      return S.Skills.Anticipation.Value(S.Primary);
+   end Anticipation;
+
+   function Deception(S : Creature_Stats) return Skills.Deception.Effective is
+   begin
+      return S.Skills.Deception.Value(S.Primary);
+   end Deception;
+
+   function Willpower(S : Creature_Stats) return Skills.Willpower.Effective is
+   begin
+      return S.Skills.Willpower.Value(S.Primary);
+   end Willpower;
+
+   function Domination(S : Creature_Stats) return Skills.Domination.Effective is
+   begin
+      return S.Skills.Domination.Value(S.Primary);
+   end Domination;
+
 end RPG.Creatures;

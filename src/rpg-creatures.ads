@@ -30,7 +30,7 @@ package RPG.Creatures is
    procedure Modify_Maximum(HP : in out Creature_HP; Amount : Creature_Maximum_HP.Modifier);
    function Is_Dead(HP : Creature_HP) return Boolean;
 
-   type Creature_Stats is record
+   type Creature_Stats is tagged record
       HP           : Creature_HP;
       Primary : RPG.Primary_Stats.Primary_Stat_Values;
       Skills : RPG.Skills.Skill_Proficiencies;
@@ -38,6 +38,16 @@ package RPG.Creatures is
 
    type Creature_Defense is new Integer;
    function Defense(S : Creature_Stats) return Creature_Defense;
+
+   -- Skill helper functions (automatically pass primary stats)
+   function Endurance(S : Creature_Stats) return Skills.Endurance.Effective;
+   function Strength(S : Creature_Stats) return Skills.Strength.Effective;
+   function Reflex(S : Creature_Stats) return Skills.Reflex.Effective;
+   function Timing(S : Creature_Stats) return Skills.Timing.Effective;
+   function Anticipation(S : Creature_Stats) return Skills.Anticipation.Effective;
+   function Deception(S : Creature_Stats) return Skills.Deception.Effective;
+   function Willpower(S : Creature_Stats) return Skills.Willpower.Effective;
+   function Domination(S : Creature_Stats) return Skills.Domination.Effective;
 
    type Creature is record
       Name : Creature_Name.T;

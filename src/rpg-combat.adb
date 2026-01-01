@@ -52,8 +52,8 @@ package body RPG.Combat is
 
    procedure Attack(Attacker : in Creature; Defender : in Out Creature) is
       Attacker_Hit_Roll : Hit_Roll := Random_Hit_Roll;
-      Defense_Value : Creature_Defense := Defense(Defender.Stats);
-      Attack_Value : Integer := Defender.Stats.Skills.Timing.Value_To_Integer(Defender.Stats.Primary);
+      Defense_Value : Creature_Defense := Defender.Stats.Defense;
+      Attack_Value : Integer := Skills.Timing.Effective_To_Integer(Defender.Stats.Timing);
       Hit_Chance : Hit_Roll := Hit_Roll(Float(Attack_Value) / (0.001 + Float(Defense_Value)));
       Damage_Amount : Creature_Current_HP;
    begin
