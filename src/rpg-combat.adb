@@ -4,6 +4,8 @@ with GNAT.Formatted_String; use GNAT.Formatted_String;
 with RPG.Dice;
 with RPG.Classes; use RPG.Classes;
 with RPG.Creatures; use RPG.Creatures;
+with RPG.Experience; use RPG.Experience;
+with RPG.Players;
 with RPG.Primary_Stats;
 with RPG.Skills;
 
@@ -122,6 +124,19 @@ package body RPG.Combat is
    begin
       return Is_Dead(F.Fighter2.Stats.HP);
    end Fighter1_Won;
+
+   procedure Run(G : in Out Game_State) is
+      F : Fight := Random_Fight(G.Player.Creature);
+   begin
+      Run_Fight(F);
+      G.Player.Creature := F.Fighter1;
+
+      if Fighter1_Won(F) then
+         RPG.Players.Award_XP(G.Player, XP_Award(Average));
+      end if;
+
+      G.Pop_Mode;
+   end Run;
 
 begin
    Float_Random.Reset(Gen);

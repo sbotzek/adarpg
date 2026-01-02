@@ -1,6 +1,8 @@
 with RPG.Creatures; use RPG.Creatures;
+with RPG.Game; use RPG.Game;
 
 package RPG.Combat is
+   procedure Run(G : in out Game_State);
    type Hit_Roll is new Float;
 
    type Fight is record
@@ -12,6 +14,5 @@ package RPG.Combat is
    procedure Run_Fight(F : in out Fight);
    procedure Run_Round(F : in out Fight);
 
-   -- Returns True if Fighter1 won the fight
    function Fighter1_Won(F : Fight) return Boolean;
 end RPG.Combat;
