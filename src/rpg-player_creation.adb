@@ -18,7 +18,7 @@ package body RPG.Player_Creation is
       return True;
    end Is_Valid_Name;
 
-   procedure Run_Pick_Name(G : in out Game_State) is
+   procedure Run_Pick_Name_Game_Mode(G : in out Game_State) is
    begin
       Put("Enter your name: ");
       declare
@@ -43,9 +43,9 @@ package body RPG.Player_Creation is
 
          Put_Line("Welcome, " & Creature_Name.To_String(G.Player.Creature.Name) & "!");
       end;
-   end Run_Pick_Name;
+   end Run_Pick_Name_Game_Mode;
 
-   procedure Run_Pick_Class(G : in out Game_State) is
+   procedure Run_Pick_Class_Game_Mode(G : in out Game_State) is
    begin
       Put_Line("Choose a class:");
       declare
@@ -87,5 +87,5 @@ package body RPG.Player_Creation is
             return;
          end if;
       end;
-   end Run_Pick_class;
+   end Run_Pick_Class_Game_Mode;
 end RPG.Player_Creation;

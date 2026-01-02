@@ -4,7 +4,7 @@ with Ada.Strings.Fixed; use Ada.Strings.Fixed;
 with RPG.Creatures;
 
 package body RPG.Main_Menu is
-   procedure Run(G : in Out Game_State) is
+   procedure Run_Main_Menu_Game_Mode(G : in Out Game_State) is
    begin
       Put_Line("=== Main Menu ===");
       Put_Line(" 1. Fight");
@@ -33,5 +33,5 @@ package body RPG.Main_Menu is
                Put_Line("Please enter a valid number.");
          end case;
       end;
-   end Run;
+   end Run_Main_Menu_Game_Mode;
 end RPG.Main_Menu;

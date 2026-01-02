@@ -125,7 +125,7 @@ package body RPG.Combat is
       return Is_Dead(F.Fighter2.Stats.HP);
    end Fighter1_Won;
 
-   procedure Run(G : in Out Game_State) is
+   procedure Run_Fight_Game_Mode(G : in Out Game_State) is
       F : Fight := Random_Fight(G.Player.Creature);
    begin
       Run_Fight(F);
@@ -136,7 +136,7 @@ package body RPG.Combat is
       end if;
 
       G.Pop_Mode;
-   end Run;
+   end Run_Fight_Game_Mode;
 
 begin
    Float_Random.Reset(Gen);

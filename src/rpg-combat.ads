@@ -2,7 +2,7 @@ with RPG.Creatures; use RPG.Creatures;
 with RPG.Game; use RPG.Game;
 
 package RPG.Combat is
-   procedure Run(G : in out Game_State);
+   procedure Run_Fight_Game_Mode(G : in out Game_State);
    type Hit_Roll is new Float;
 
    type Fight is record

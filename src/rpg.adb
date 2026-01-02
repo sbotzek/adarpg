@@ -24,13 +24,13 @@ package body RPG is
       Put_Line("");
       case G.Modes.Last_Element is
          when Pick_Name =>
-            RPG.Player_Creation.Run_Pick_Name(G);
+            RPG.Player_Creation.Run_Pick_Name_Game_Mode(G);
          when Pick_Class =>
-            RPG.Player_Creation.Run_Pick_Class(G);
+            RPG.Player_Creation.Run_Pick_Class_Game_Mode(G);
          when Game.Main_Menu =>
-            RPG.Main_Menu.Run(G);
+            RPG.Main_Menu.Run_Main_Menu_Game_Mode(G);
          when Fight =>
-            RPG.Combat.Run(G);
+            RPG.Combat.Run_Fight_Game_Mode(G);
          when Quit =>
             Put_Line("Goodbye!");
       end case;
