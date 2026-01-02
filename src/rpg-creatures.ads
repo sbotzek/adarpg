@@ -41,7 +41,7 @@ package RPG.Creatures is
    function Defense(S : Creature_Stats) return Creature_Defense;
 
    -- Skill helper functions (automatically pass primary stats)
-   function Endurance(S : Creature_Stats) return Skills.Endurance.Effective;
+   function Toughness(S : Creature_Stats) return Skills.Toughness.Effective;
    function Strength(S : Creature_Stats) return Skills.Strength.Effective;
    function Reflex(S : Creature_Stats) return Skills.Reflex.Effective;
    function Timing(S : Creature_Stats) return Skills.Timing.Effective;

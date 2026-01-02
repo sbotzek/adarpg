@@ -1,8 +1,8 @@
 package body RPG.Skills is
    Skills : constant array (Skill_Id) of Skill :=
-     (Endurance_Id    => (Id           => Endurance_Id,
-                          Name         => Skill_Name.Create("Endurance"),
-                          Primary_Stat => Endurance.Bonus_Stat_Id),
+     (Toughness_Id    => (Id           => Toughness_Id,
+                          Name         => Skill_Name.Create("Toughness"),
+                          Primary_Stat => Toughness.Bonus_Stat_Id),
       Strength_Id     => (Id           => Strength_Id,
                           Name         => Skill_Name.Create("Strength"),
                           Primary_Stat => Strength.Bonus_Stat_Id),

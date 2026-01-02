@@ -65,10 +65,10 @@ package body RPG.Creatures is
                             + Skills.Anticipation.To_Integer(S.Anticipation));
    end Defense;
 
-   function Endurance(S : Creature_Stats) return Skills.Endurance.Effective is
+   function Toughness(S : Creature_Stats) return Skills.Toughness.Effective is
    begin
-      return S.Skills.Endurance.Value(S.Primary);
-   end Endurance;
+      return S.Skills.Toughness.Value(S.Primary);
+   end Toughness;
 
    function Strength(S : Creature_Stats) return Skills.Strength.Effective is
    begin

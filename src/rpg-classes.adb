@@ -7,7 +7,7 @@ package body RPG.Classes is
      (Cleric  => (Id => Cleric,
                   Name => Class_Name.Create("Cleric"),
                   HP_Per_Level => (Number => 1, Size => 8, Bonus => 0),
-                  Skills => (RPG.Skills.Endurance_Id => (Level_Interval => 1, Amount => 3),
+                  Skills => (RPG.Skills.Toughness_Id => (Level_Interval => 1, Amount => 3),
                              RPG.Skills.Strength_Id => (Level_Interval => 1, Amount => 3),
 
                              RPG.Skills.Reflex_Id => (Level_Interval => 1, Amount => 2),
@@ -21,7 +21,7 @@ package body RPG.Classes is
       Fighter => (Id => Fighter,
                   Name => Class_Name.Create("Fighter"),
                   HP_Per_Level => (Number => 1, Size => 10, Bonus => 0),
-                  Skills => (RPG.Skills.Endurance_Id => (Level_Interval => 1, Amount => 5),
+                  Skills => (RPG.Skills.Toughness_Id => (Level_Interval => 1, Amount => 5),
                              RPG.Skills.Strength_Id => (Level_Interval => 1, Amount => 5),
 
                              RPG.Skills.Reflex_Id => (Level_Interval => 1, Amount => 4),
@@ -35,7 +35,7 @@ package body RPG.Classes is
       Thief   => (Id => Thief,
                   Name => Class_Name.Create("Thief"),
                   HP_Per_Level => (Number => 1, Size => 6, Bonus => 0),
-                  Skills => (RPG.Skills.Endurance_Id => (Level_Interval => 1, Amount => 3),
+                  Skills => (RPG.Skills.Toughness_Id => (Level_Interval => 1, Amount => 3),
                              RPG.Skills.Strength_Id => (Level_Interval => 1, Amount => 3),
 
                              RPG.Skills.Reflex_Id => (Level_Interval => 1, Amount => 5),
@@ -49,7 +49,7 @@ package body RPG.Classes is
       Wizard  => (Id => Wizard,
                   Name => Class_Name.Create("Wizard"),
                   HP_Per_Level => (Number => 1, Size => 4, Bonus => 0),
-                  Skills => (RPG.Skills.Endurance_Id => (Level_Interval => 1, Amount => 2),
+                  Skills => (RPG.Skills.Toughness_Id => (Level_Interval => 1, Amount => 2),
                              RPG.Skills.Strength_Id => (Level_Interval => 1, Amount => 2),
 
                              RPG.Skills.Reflex_Id => (Level_Interval => 1, Amount => 3),
@@ -87,9 +87,9 @@ package body RPG.Classes is
          begin
             if Natural(C.Level) mod Natural(Gain.Level_Interval) = 0 then
                case Skill_Id is
-                  when RPG.Skills.Endurance_Id =>
-                     RPG.Skills.Endurance.Add_Base(C.Stats.Skills.Endurance,
-                       RPG.Skills.Endurance.To_Base(Gain.Amount));
+                  when RPG.Skills.Toughness_Id =>
+                     RPG.Skills.Toughness.Add_Base(C.Stats.Skills.Toughness,
+                       RPG.Skills.Toughness.To_Base(Gain.Amount));
                   when RPG.Skills.Strength_Id =>
                      RPG.Skills.Strength.Add_Base(C.Stats.Skills.Strength,
                        RPG.Skills.Strength.To_Base(Gain.Amount));

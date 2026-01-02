@@ -3,7 +3,7 @@ with RPG.Skill_Values;
 with RPG.Primary_Stats;
 
 package RPG.Skills is
-   type Skill_Id is (Endurance_Id, Strength_Id,
+   type Skill_Id is (Toughness_Id, Strength_Id,
                      Reflex_Id, Timing_Id,
                      Anticipation_Id, Deception_Id,
                      Willpower_Id, Domination_Id);
@@ -17,7 +17,7 @@ package RPG.Skills is
 
    function Find_Skill(Id : Skill_Id) return Skill;
 
-   package Endurance is new RPG.Skill_Values
+   package Toughness is new RPG.Skill_Values
      (Bonus_Stat => Primary_Stats.Vigor_Id);
    package Reflex is new RPG.Skill_Values
      (Bonus_Stat => Primary_Stats.Agility_Id);
@@ -36,7 +36,7 @@ package RPG.Skills is
      (Bonus_Stat => Primary_Stats.Spirit_Id);
 
    type Skill_Proficiencies is record
-      Endurance : Skills.Endurance.T;
+      Toughness : Skills.Toughness.T;
       Reflex : Skills.Reflex.T;
       Anticipation : Skills.Anticipation.T;
       Willpower : Skills.Willpower.T;
