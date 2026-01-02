@@ -128,6 +128,7 @@ package body RPG.Combat is
    procedure Run_Fight_Game_Mode(G : in Out Game_State) is
       F : Fight := Random_Fight(G.Player.Creature);
    begin
+      Full_Heal(G.Player.Creature.Stats.HP);
       Run_Fight(F);
       G.Player.Creature := F.Fighter1;
 
