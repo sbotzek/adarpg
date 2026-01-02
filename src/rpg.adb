@@ -2,7 +2,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Strings; use Ada.Strings;
 with Ada.Strings.Fixed; use Ada.Strings.Fixed;
 with RPG.Player_Creation;
-with RPG.Combat;
+with RPG.Combat.Fights;
 with RPG.Game; use RPG.Game;
 
 package body RPG is
@@ -31,8 +31,8 @@ package body RPG is
             RPG.Player_Creation.Run_Pick_Class_Game_Mode(G);
          when Main_Menu =>
             Run_Main_Menu_Game_Mode(G);
-         when Fight =>
-            RPG.Combat.Run_Fight_Game_Mode(G);
+        when Fight =>
+            RPG.Combat.Fights.Run_Fight_Game_Mode(G);
          when Quit =>
             Put_Line("Goodbye!");
       end case;

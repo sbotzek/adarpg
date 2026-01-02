@@ -9,7 +9,7 @@ with RPG.Players;
 with RPG.Primary_Stats;
 with RPG.Skills;
 
-package body RPG.Combat is
+package body RPG.Combat.Fights is
    package Float_Random renames Ada.Numerics.Float_Random;
 
    Gen : Float_Random.Generator;
@@ -141,4 +141,4 @@ package body RPG.Combat is
 
 begin
    Float_Random.Reset(Gen);
-end RPG.Combat;
+end RPG.Combat.Fights;
