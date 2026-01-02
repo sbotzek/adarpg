@@ -1,4 +1,3 @@
-with RPG.Game;
 with RPG.Creatures; use RPG.Creatures;
 
 package RPG.Combat is
@@ -12,4 +11,7 @@ package RPG.Combat is
    function Random_Fight(Fighter1 : in Creature) return Fight;
    procedure Run_Fight(F : in out Fight);
    procedure Run_Round(F : in out Fight);
+
+   -- Returns True if Fighter1 won the fight
+   function Fighter1_Won(F : Fight) return Boolean;
 end RPG.Combat;

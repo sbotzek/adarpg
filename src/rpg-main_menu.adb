@@ -25,7 +25,7 @@ package body RPG.Main_Menu is
 
          case Choice is
             when 1 =>
-               RPG.Creatures.Full_Heal(G.Player_Creature.Stats.HP);
+               RPG.Creatures.Full_Heal(G.Player.Creature.Stats.HP);
                G.Push_Mode(Fight);
             when 2 =>
                G.Replace_Mode(Quit);

@@ -1,6 +1,5 @@
 with Ada.Containers.Vectors;
-with RPG.Creatures; use RPG.Creatures;
-with RPG.Classes; use RPG.Classes;
+with RPG.Players; use RPG.Players;
 
 package RPG.Game is
    type Game_Mode is (Pick_Name, Pick_Class, Main_Menu, Fight, Quit);
@@ -10,9 +9,8 @@ package RPG.Game is
       Element_Type => Game_Mode);
 
    type Game_State is tagged record
-      Modes           : Game_Mode_Stacks.Vector;
-      Player_Creature : Creature;
-      Player_Class_Id : Optional_Class_Id := None;
+      Modes  : Game_Mode_Stacks.Vector;
+      Player : RPG.Players.Player;
    end record;
 
    procedure Push_Mode(G : in out Game_State; Mode : Game_Mode);

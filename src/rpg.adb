@@ -3,7 +3,9 @@ with RPG.Player_Creation;
 with RPG.Main_Menu;
 with RPG.Combat;
 with RPG.Creatures;
+with RPG.Experience; use RPG.Experience;
 with RPG.Game; use RPG.Game;
+with RPG.Players;
 
 package body RPG is
    procedure Game_Loop(G : in out Game_State);
@@ -32,11 +34,14 @@ package body RPG is
             RPG.Main_Menu.Run(G);
          when Fight =>
             declare
-               F : RPG.Combat.Fight := RPG.Combat.Random_Fight(G.Player_Creature);
+               F : RPG.Combat.Fight := RPG.Combat.Random_Fight(G.Player.Creature);
             begin
                RPG.Combat.Run_Fight(F);
-               -- Update player creature state after fight
-               G.Player_Creature := F.Fighter1;
+               G.Player.Creature := F.Fighter1;
+
+               if RPG.Combat.Fighter1_Won(F) then
+                  RPG.Players.Award_XP(G.Player, XP_Award(Average));
+               end if;
             end;
             G.Pop_Mode;
          when Quit =>

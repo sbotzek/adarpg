@@ -38,10 +38,10 @@ package body RPG.Player_Creation is
             return;
          end if;
 
-         G.Player_Creature.Name := Creature_Name.Create(Trimmed);
+         G.Player.Creature.Name := Creature_Name.Create(Trimmed);
          G.Replace_Mode(Pick_Class);
 
-         Put_Line("Welcome, " & Creature_Name.To_String(G.Player_Creature.Name) & "!");
+         Put_Line("Welcome, " & Creature_Name.To_String(G.Player.Creature.Name) & "!");
       end;
    end Run_Pick_Name;
 
@@ -74,15 +74,15 @@ package body RPG.Player_Creation is
          for Id in Class_Id loop
             Index := Index + 1;
             if Index = Choice then
-               G.Player_Class_Id := Id;
-               G.Player_Creature.Stats.Primary := RPG.Primary_Stats.Roll;
-               RPG.Classes.Initialize_Creature(G.Player_Creature, Id, 1);
+               G.Player.Class_Id := Id;
+               G.Player.Creature.Stats.Primary := RPG.Primary_Stats.Roll;
+               RPG.Classes.Initialize_Creature(G.Player.Creature, Id, 1);
                G.Replace_Mode(Main_Menu);
                exit;
             end if;
          end loop;
 
-         if G.Player_Class_Id = None then
+         if G.Player.Class_Id = None then
             Put_Line("Invalid number.");
             return;
          end if;

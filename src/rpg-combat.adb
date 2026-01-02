@@ -3,7 +3,6 @@ with Ada.Numerics.Float_Random;
 with GNAT.Formatted_String; use GNAT.Formatted_String;
 with RPG.Dice;
 with RPG.Classes; use RPG.Classes;
-with RPG.Game; use RPG.Game;
 with RPG.Creatures; use RPG.Creatures;
 with RPG.Primary_Stats;
 with RPG.Skills;
@@ -53,7 +52,7 @@ package body RPG.Combat is
    procedure Attack(Attacker : in Creature; Defender : in Out Creature) is
       Attacker_Hit_Roll : Hit_Roll := Random_Hit_Roll;
       Defense_Value : Creature_Defense := Defender.Stats.Defense;
-      Attack_Value : Integer := Skills.Timing.To_Integer(Defender.Stats.Timing);
+      Attack_Value : Integer := Skills.Timing.To_Integer(Attacker.Stats.Timing);
       Hit_Chance : Hit_Roll := Hit_Roll(Float(Attack_Value) / (0.001 + Float(Defense_Value)));
       Damage_Amount : Creature_Current_HP;
    begin
@@ -118,6 +117,11 @@ package body RPG.Combat is
          Put_Line(" is victorious!");
       end if;
    end Run_Fight;
+
+   function Fighter1_Won(F : Fight) return Boolean is
+   begin
+      return Is_Dead(F.Fighter2.Stats.HP);
+   end Fighter1_Won;
 
 begin
    Float_Random.Reset(Gen);

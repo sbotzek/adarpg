@@ -121,6 +121,7 @@ package body RPG.Classes is
    begin
       C.Level := 0;
       C.Stats.HP := (others => <>);
+      Increase_Maximum_Base(C.Stats.HP, Creature_Maximum_HP.To_Base(1));
       C.Stats.Skills := (others => <>);
       for I in 1 .. Level loop
          Level_Up(C, Id);
